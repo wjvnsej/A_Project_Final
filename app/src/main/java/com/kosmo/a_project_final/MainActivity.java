@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-
-
         /* 로딩화면 부르기 */
         Intent intent = new Intent(this, Loading.class);
         startActivity(intent);

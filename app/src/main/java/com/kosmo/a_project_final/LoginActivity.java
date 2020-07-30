@@ -23,9 +23,6 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-
-
         /* 로딩화면 부르기 */
         Intent intent = new Intent(this, Loading.class);
         startActivity(intent);
