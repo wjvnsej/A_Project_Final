@@ -9,8 +9,14 @@ import android.widget.GridView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int [] resIds = { R.drawable.club, R.drawable.matching, R.drawable.manager, R.drawable.mypage };
-    String[] titles = { "Club", "Matching", "Manager", "Mypage"  };
+    int [] resIds = {
+            R.drawable.club, R.drawable.matching, R.drawable.manager,
+            R.drawable.mypage, R.drawable.qna, R.drawable.ball
+    };
+    String[] titles = {
+            "Club", "Matching", "Manager",
+            "Mypage", "Q&A", "Charge"
+    };
 
     private GridView gridView;
 
