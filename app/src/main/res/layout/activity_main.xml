@@ -14,4 +14,11 @@
         android:textSize="50sp"
         android:textColor="#00FF00"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="깃연동테스트_상혁"
+        android:textSize="50sp"
+        android:textColor="#00FF00"/>
+
 </LinearLayout>
