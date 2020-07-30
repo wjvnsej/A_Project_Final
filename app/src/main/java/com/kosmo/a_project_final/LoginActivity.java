@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -84,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                 첫번째는 요청URL, 두번째와 세번째는 서버로 전송할 파라미터임.
                  */
                 new AsyncHttpServer().execute(
-                        "http://192.168.219.116:8282/project_final/android/memberLogin.do",
+                        "http://192.168.219.200:8282/project_final/android/memberLogin.do",
                         "m_id="+m_id.getText().toString(),
                         "m_pw="+m_pw.getText().toString()
                 );
@@ -182,17 +183,20 @@ public class LoginActivity extends AppCompatActivity {
             try{
 
                 JSONObject jsonObject = new JSONObject(s);
-                int success =
-                        Integer.parseInt(jsonObject.getString("isLogin"));
+                int success = Integer.parseInt(jsonObject.getString("isLogin"));
+                JSONObject memberInfo = jsonObject.getJSONObject("memberInfo");
+                String m_id = memberInfo.getString("m_id");
+                String m_name = memberInfo.getString("m_name");
 
                 //파싱후 로그인 성공인 경우
                 if(success==1){
                     sb.append("로그인성공^^\n");
 
-
                     //메인으로 이동
-                    Intent Mainintent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(Mainintent);
+                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    mainIntent.putExtra("m_id", m_id);
+                    mainIntent.putExtra("m_name", m_name);
+                    startActivity(mainIntent);
 
                 }
                 else{

@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private GridView menuView;
-    private TextView logout;
+    private TextView logout, log_name;
+    String m_id, m_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
         MenuAdapter adapter = new MenuAdapter(this, resIds, titles );
         menuView = (GridView)findViewById(R.id.gridview);
         menuView.setAdapter(adapter);
+
+        Intent mainIntent = getIntent();
+        log_name = (TextView)findViewById(R.id.log_name);
+        m_id = mainIntent.getStringExtra("m_id");
+        m_name = mainIntent.getStringExtra("m_name");
+
+        log_name.setText(m_name);
+
+        SharedPreference.setAttribute(getApplicationContext(), "m_id", m_id);
+
+        String id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
 
         /* 로그아웃 */
         logout = findViewById(R.id.logout);
@@ -63,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                                         Intent intent = new Intent(
                                                 getApplicationContext(), // 현재 화면의 제어권자
                                                 LoginActivity.class); // 다음 넘어갈 클래스 지정
+                                        SharedPreference.removeAllAttribute(getApplicationContext());
                                         startActivity(intent);
                                     }
                                 })
