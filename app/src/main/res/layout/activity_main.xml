@@ -30,13 +30,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"/>
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="B-PRO"
-        android:textSize="80dp"
-        android:gravity="center"
-        android:textColor="#000000"/>
+        android:src="@drawable/main_logo"
+        android:layout_gravity="center"/>
 
     <GridView
         android:layout_width="match_parent"
