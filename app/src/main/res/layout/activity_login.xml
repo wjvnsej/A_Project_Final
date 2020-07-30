@@ -71,14 +71,14 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/m_id"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:selectAllOnFocus="true"
                 android:hint="ID"/>
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/m_pw"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:hint="PASS"
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/login"
+                android:id="@+id/btn_login"
                 android:layout_width="110dp"
                 android:layout_height="100dp"
                 android:enabled="true"
