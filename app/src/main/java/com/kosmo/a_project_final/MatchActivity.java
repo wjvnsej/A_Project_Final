@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class ClubActivity extends AppCompatActivity {
+public class MatchActivity extends AppCompatActivity {
 
     TextView title_text;
     String title;
@@ -14,12 +14,13 @@ public class ClubActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_club);
+        setContentView(R.layout.activity_match);
 
         Intent titleIntent = getIntent();
         title_text = (TextView)findViewById(R.id.title);
         title = titleIntent.getStringExtra("title");
         title_text.setText(title);
+
 
     }
 }

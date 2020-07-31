@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ChargeActivity"></activity>
+        <activity android:name=".MypageActivity" />
+        <activity android:name=".ManagerActivity" />
+        <activity android:name=".MatchActivity" />
         <activity android:name=".ClubActivity" />
-        <activity android:name=".WebviewActivity"></activity>
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".WebviewActivity" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="locked">
@@ -22,7 +25,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
         </activity>
         <activity android:name=".Loading" />
