@@ -12,11 +12,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 //커스텀 대화상자를 띄우기 위해 XML파일을 전개한다.
                 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View detail_layout = inflater.inflate(R.layout.activity_detail, null);
+                View detail_layout = inflater.inflate(R.layout.activity_club, null);
 
                 Intent intent1;
 
                 if(titles[i] == "Club"){
 
-                    intent1 = new Intent(getApplicationContext(), DetailActivity.class);
+                    intent1 = new Intent(getApplicationContext(), ClubActivity.class);
                     intent1.putExtra("title", titles[i]);
                     startActivity(intent1);
                 }
