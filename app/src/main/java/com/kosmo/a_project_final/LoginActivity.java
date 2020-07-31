@@ -35,11 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private VideoView videoView;
     EditText m_id, m_pw;
     ProgressDialog dialog;
+    TextView join, login_search;
 
-
-
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,23 +46,18 @@ public class LoginActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         /* 로딩화면 부르기 */
-        Intent intent = new Intent(this, Loading.class);
+        final Intent intent = new Intent(this, Loading.class);
         startActivity(intent);
 
+        /* 동영상 재생 */
         videoView = (VideoView) findViewById(R.id.loginvideo);
-
         MediaController mediaController = new MediaController(this);
-
         mediaController.setAnchorView(videoView);
-
         final Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.login);
-
         videoView.setMediaController(null);
         videoView.setVideoURI(uri);
         videoView.requestFocus();
-
         videoView.start();
-
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -73,11 +65,33 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        /* 회원가입, 아이디비번찾기 */
+        join = (TextView)findViewById(R.id.join);
+        login_search = (TextView)findViewById(R.id.login_search);
+
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
+                intent.putExtra("url", "http://192.168.219.200:8282/project_final/member/memberSelect.do");
+                startActivity(intent);
+            }
+        });
+
+        login_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
+                intent.putExtra("url", "http://192.168.219.200:8282/project_final/member/id_pw.do");
+                startActivity(intent);
+            }
+        });
+
         /* 로그인 */
         //위젯얻어오기
         m_id = (EditText)findViewById(R.id.m_id);
         m_pw = (EditText)findViewById(R.id.m_pw);
-
 
         Button btnLogin = (Button)findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener(){
@@ -94,9 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                         "m_id="+m_id.getText().toString(),
                         "m_pw="+m_pw.getText().toString()
                 );
-
             }
-
         });
 
         //진행대화창을 띄울 준비를 함.
@@ -185,8 +197,8 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             StringBuffer sb = new StringBuffer();
-            try{
 
+            try{
                 JSONObject jsonObject = new JSONObject(s);
                 int success = Integer.parseInt(jsonObject.getString("isLogin"));
                 JSONObject memberInfo = jsonObject.getJSONObject("memberInfo");
@@ -217,7 +229,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     sb.toString(),
                     Toast.LENGTH_LONG).show();
-
         }
     }
 
