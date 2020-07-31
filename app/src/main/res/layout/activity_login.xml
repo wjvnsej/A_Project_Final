@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:text="나는 프로지...ㅎ"
+                android:text="We can Be a PRO"
                 android:textSize="50dp"/>
         </LinearLayout>
     </FrameLayout>
@@ -43,18 +43,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ball"
-                android:padding="10dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:text="B-PRO"
-                android:textSize="50sp"
-                android:textColor="#000"
-                android:gravity="center"/>
+                android:src="@drawable/main_logo"/>
 
         </LinearLayout>
 
