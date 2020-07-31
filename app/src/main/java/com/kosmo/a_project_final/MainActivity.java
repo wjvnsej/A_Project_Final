@@ -3,14 +3,20 @@ package com.kosmo.a_project_final;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,16 +39,33 @@ public class MainActivity extends AppCompatActivity {
         /* 상태 바 지우기(전체화면) */
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        /* 로딩화면 부르기 */
+        final Intent intent = new Intent(this, Loading.class);
+        startActivity(intent);
         setContentView(R.layout.activity_main);
 
-        /* 로딩화면 부르기 */
-        Intent intent = new Intent(this, Loading.class);
-        startActivity(intent);
 
         /* 메뉴 띄우기 */
         MenuAdapter adapter = new MenuAdapter(this, resIds, titles );
         menuView = (GridView)findViewById(R.id.gridview);
         menuView.setAdapter(adapter);
+        menuView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                //커스텀 대화상자를 띄우기 위해 XML파일을 전개한다.
+                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View detail_layout = inflater.inflate(R.layout.activity_detail, null);
+
+                Intent intent1;
+
+                if(titles[i] == "Club"){
+
+                    intent1 = new Intent(getApplicationContext(), DetailActivity.class);
+                    intent1.putExtra("title", titles[i]);
+                    startActivity(intent1);
+                }
+            }
+        });
 
         Intent mainIntent = getIntent();
         log_name = (TextView)findViewById(R.id.log_name);
