@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
-                intent.putExtra("url", "http://192.168.219.200:8282/project_final/member/memberSelect.do");
+                intent.putExtra("url", "http://192.168.219.130:8282/project_final/member/memberSelect.do");
                 startActivity(intent);
             }
         });
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
-                intent.putExtra("url", "http://192.168.219.200:8282/project_final/member/id_pw.do");
+                intent.putExtra("url", "http://192.168.219.130:8282/project_final/member/id_pw.do");
                 startActivity(intent);
             }
         });
