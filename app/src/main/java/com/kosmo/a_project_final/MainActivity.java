@@ -18,12 +18,12 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     int [] resIds = {
-            R.drawable.club, R.drawable.matching, R.drawable.manager,
-            R.drawable.mypage, R.drawable.qna, R.drawable.ball
+            R.drawable.club, R.drawable.matching, R.drawable.manager, R.drawable.mypage,
+            R.drawable.qna, R.drawable.ball, R.drawable.tactics, R.drawable.qr
     };
     String[] titles = {
-            "Club", "Matching", "Manager",
-            "Mypage", "Q&A", "Charge"
+            "Club", "Matching", "Manager", "Mypage",
+            "Q&A", "Charge", "Tacktics", "QR"
     };
 
     private GridView menuView;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         setContentView(R.layout.activity_main);
 
+        onBackPressed();
 
         /* 메뉴 띄우기 */
         MenuAdapter adapter = new MenuAdapter(this, resIds, titles );
@@ -104,7 +105,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreference.setAttribute(getApplicationContext(), "m_id", m_id);
 
         String id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
-        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "접속 ID : " + id, Toast.LENGTH_SHORT).show();
+
+    }
+
+    //뒤로가기 버튼
+    @Override
+    public void onBackPressed() {
 
         /* 로그아웃 */
         logout = findViewById(R.id.logout);

@@ -43,7 +43,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridview"
         android:numColumns="2"
-        android:padding="10sp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:gravity="center"/>
 
 </LinearLayout>
