@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChargeActivity"></activity>
+        <activity android:name=".ClubView"></activity>
+        <activity android:name=".ClubList" />
+        <activity android:name=".ClubMy" />
+        <activity android:name=".ChargeActivity" />
         <activity android:name=".MypageActivity" />
         <activity android:name=".ManagerActivity" />
         <activity android:name=".MatchActivity" />

@@ -56,39 +56,38 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent1;
 
                 if(titles[i] == "Club"){
-                    intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
-                    intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/club/clubMain.do");
+                    intent1 = new Intent(getApplicationContext(), ClubActivity.class);
+
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Matching"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/match/matchMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/match/matchMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Manager"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/manager/managerMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/manager/managerMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Mypage"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/member/mypageMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/member/mypageMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Q&A"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/customer/qnaMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/customer/qnaMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Charge"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/payment/paymentMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/payment/paymentMain.do");
                     startActivity(intent1);
                 }
             }
