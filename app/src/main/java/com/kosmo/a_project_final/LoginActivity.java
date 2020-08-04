@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                videoView.start();
                 mp.setLooping(true);
             }
         });
@@ -159,7 +160,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
 
-                    // 스프링 서버에 연결성공한 경우 JSON데이터를 읽어서 저장한다.
                     BufferedReader reader = new BufferedReader(
                             new InputStreamReader(conn.getInputStream(),"UTF-8")
                     );
@@ -207,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //파싱후 로그인 성공인 경우
                 if(success==1){
-                    sb.append("로그인성공^^\n");
+                    sb.append(m_name + "님 환영합니다!");
 
                     //메인으로 이동
                     Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);

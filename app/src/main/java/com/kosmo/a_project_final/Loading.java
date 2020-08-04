@@ -23,9 +23,6 @@ public class Loading extends AppCompatActivity {
                 .loadAnimation
                         (getApplicationContext(), R.anim.fade_in);
         sublogo.startAnimation(anim);
-
-
-
         startLoading();
     }
 
@@ -36,7 +33,7 @@ public class Loading extends AppCompatActivity {
             public void run() {
                 finish();
             }
-        }, 3000);
+        }, 2000);
     }
 
     @Override

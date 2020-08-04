@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.kosmo.a_project_final">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,7 +25,8 @@
         <activity android:name=".WebviewActivity" />
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="locked">
+            android:screenOrientation="locked"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
