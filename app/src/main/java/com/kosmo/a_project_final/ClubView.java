@@ -45,6 +45,7 @@ public class ClubView extends AppCompatActivity {
         String img = "http://192.168.219.130:8282/project_final/resources/uploadsFile/"+c_emb;
         Picasso.get().load(img).into(imageView);
 
+        
         textView.setText(c_name);
 
     }
