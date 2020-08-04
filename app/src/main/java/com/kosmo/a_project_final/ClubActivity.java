@@ -48,11 +48,6 @@ public class ClubActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
     }
 
     class AsyncHttpServer extends AsyncTask<String, Void, List<Map<String, Object>>>
@@ -63,7 +58,6 @@ public class ClubActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
@@ -120,11 +114,11 @@ public class ClubActivity extends AppCompatActivity {
         protected void onPostExecute(final List<Map<String, Object>> s) {
             super.onPostExecute(s);
             Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(s));
-            ClubList clubList = new ClubList(getApplicationContext(),R.layout.activity_club_list, s);
-            listView.setAdapter(clubList);
+            ClubList_Adapter clubListAdapter = new ClubList_Adapter(getApplicationContext(),R.layout.activity_club_list, s);
+            listView.setAdapter(clubListAdapter);
 
             //리스트뷰 안에 아이템들 눌렀을때
-            ClubList adapter = new ClubList(getApplicationContext(), R.layout.activity_club_list, s);
+            ClubList_Adapter adapter = new ClubList_Adapter(getApplicationContext(), R.layout.activity_club_list, s);
             listView = (ListView)findViewById(R.id.club_list);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
