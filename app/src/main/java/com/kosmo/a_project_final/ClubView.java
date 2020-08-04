@@ -28,6 +28,8 @@ public class ClubView extends AppCompatActivity {
     String TAG = "iKOSMO";
     String c_emb,c_name;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +50,9 @@ public class ClubView extends AppCompatActivity {
     }
     //클럽 맴버 리스트
     public void ClubMemberList(View view){
-
         Intent clubIntent = getIntent();
         String c_idx = clubIntent.getStringExtra("c_idx");
+        Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer().execute(
                 "http://192.168.219.130:8282/project_final/android/clubMember.do",
@@ -117,9 +119,12 @@ public class ClubView extends AppCompatActivity {
 
     //클럽 모든 경기 리스트
     public void ClubMatch(View view){
-        Intent clubIntent = getIntent();
-        String c_idx = clubIntent.getStringExtra("c_idx");
+
+        Intent clubIntent1 = getIntent();
+        //int c_idx = Integer.parseInt(clubIntent1.getStringExtra("c_idx"));
+        String c_idx = clubIntent1.getStringExtra("c_idx");
         Log.i(TAG,"c_idx:"+c_idx);
+
         new AsyncHttpServer2().execute(
                 "http://192.168.219.130:8282/project_final/android/clubViewMatch.do",
                 "c_idx="+c_idx
@@ -127,7 +132,7 @@ public class ClubView extends AppCompatActivity {
     }
     class AsyncHttpServer2 extends AsyncTask<String, Void, List<Map<String, Object>>>
     {
-        List<Map<String, Object>> clubMemberList = null;
+        List<Map<String, Object>> clubMatch = null;
         ListView listView = (ListView)findViewById(R.id.club_memberlist);
 
         @Override
@@ -163,13 +168,13 @@ public class ClubView extends AppCompatActivity {
 
                 Type listType = new TypeToken<List<Map<String, Object>>>(){}.getType();
                 Gson g = new Gson();
-                clubMemberList = g.fromJson(receiveData.toString(),listType);
+                clubMatch = g.fromJson(receiveData.toString(),listType);
 
             }
             catch(Exception e){
                 e.printStackTrace();
             }
-            return clubMemberList;
+            return clubMatch;
         }
 
         @Override
@@ -177,8 +182,8 @@ public class ClubView extends AppCompatActivity {
             super.onPostExecute(maps);
             Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
 
-            ClubMember_Adapter clubMemberAdapter = new ClubMember_Adapter(getApplicationContext(),R.layout.activity_club_member__adapter, maps);
-            listView.setAdapter(clubMemberAdapter);
+            ClubMatch_Adapter clubMatchAdapter = new ClubMatch_Adapter(getApplicationContext(),R.layout.activity_club_member__adapter, maps);
+            listView.setAdapter(clubMatchAdapter);
 
         }
     }
