@@ -35,6 +35,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation files('libs/httpclient-4.2.2.jar')
     implementation 'com.google.code.gson:gson:2.8.5'
-    compile 'com.squareup.picasso:picasso:2.3.3'
+    implementation 'com.squareup.picasso:picasso:2.3.3'
     implementation 'com.squareup.picasso:picasso:2.71828'
 }

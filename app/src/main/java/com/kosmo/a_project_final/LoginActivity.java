@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                 첫번째는 요청URL, 두번째와 세번째는 서버로 전송할 파라미터임.
                  */
                 new AsyncHttpServer().execute(
-                        "http://192.168.219.200:8282/project_final/android/memberLogin.do",
+                        "http://192.168.219.130:8282/project_final/android/memberLogin.do",
                         "m_id="+m_id.getText().toString(),
                         "m_pw="+m_pw.getText().toString()
                 );
