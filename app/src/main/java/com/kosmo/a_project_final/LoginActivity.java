@@ -243,9 +243,11 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject memberInfo = jsonObject.getJSONObject("memberInfo");
                 String m_id = memberInfo.getString("m_id");
                 String m_name = memberInfo.getString("m_name");
+                String m_pw = memberInfo.getString("m_pw");
 
                 SharedPreference.setAttribute(getApplicationContext(), "m_id", m_id);
                 SharedPreference.setAttribute(getApplicationContext(), "m_name", m_name);
+                SharedPreference.setAttribute(getApplicationContext(), "m_pw", m_pw);
 
                 //파싱후 로그인 성공인 경우
                 if(success==1){
@@ -262,11 +264,7 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //결과출력
-            dialog.dismiss();
-            Toast.makeText(getApplicationContext(),
-                    sb.toString(),
-                    Toast.LENGTH_LONG).show();
+
         }
     }
 
