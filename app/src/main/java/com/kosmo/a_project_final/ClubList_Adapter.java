@@ -63,7 +63,7 @@ public class ClubList_Adapter extends BaseAdapter {
         clubName.setText(list.get(position).get("c_name").toString());
 
         //이미지 보내기
-        String img = "http://192.168.219.130:8282/project_final/resources/uploadsFile/"+list.get(position).get("c_emb").toString();
+        String img = "http://192.168.219.200:8282/project_final/resources/uploadsFile/"+list.get(position).get("c_emb").toString();
         Picasso.get().load(img).into(clubEmb);
 
         return convertView;
