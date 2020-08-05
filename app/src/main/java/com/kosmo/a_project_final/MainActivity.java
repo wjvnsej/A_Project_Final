@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -56,55 +58,60 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent1;
 
+                String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+
                 if(titles[i] == "Club"){
                     intent1 = new Intent(getApplicationContext(), ClubActivity.class);
 
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Matching"){
-                    intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
-                    intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/match/matchMain.do");
-                    startActivity(intent1);
+
+                    String getCookie = CookieManager.getInstance().getCookie("http://192.168.219.200:8282/project_final/android/memberLogin.do");
+                    Log.d("KOSMO61", getCookie);
+
+                    if(getCookie != null) {
+
+                        intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
+                        intent1.putExtra("title", titles[i]);
+                        intent1.putExtra("url", "http://192.168.219.200:8282/project_final/match/matchMain.do");
+                        startActivity(intent1);
+                    }
                 }
                 else if(titles[i] == "Manager"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/manager/managerMain.do");
+                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/manager/managerMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Mypage"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/member/mypageMain.do");
+                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/member/mypageMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Q&A"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/customer/qnaMain.do");
+                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/customer/qnaMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Charge"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/payment/paymentMain.do");
+                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/payment/paymentMain.do");
                     startActivity(intent1);
                 }
             }
         });
 
-        Intent mainIntent = getIntent();
-        log_name = (TextView)findViewById(R.id.log_name);
-        m_id = mainIntent.getStringExtra("m_id");
-        m_name = mainIntent.getStringExtra("m_name");
 
+        log_name = (TextView)findViewById(R.id.log_name);
+        String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+        String m_name = SharedPreference.getAttribute(getApplicationContext(), "m_name");
         log_name.setText(m_name);
 
-        SharedPreference.setAttribute(getApplicationContext(), "m_id", m_id);
-
-        String id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
-        Toast.makeText(getApplicationContext(), "접속 ID : " + id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), m_name + " 님 환영합니다.", Toast.LENGTH_SHORT).show();
 
     }
 

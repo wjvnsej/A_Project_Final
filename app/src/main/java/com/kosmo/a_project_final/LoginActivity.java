@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MediaController;
@@ -21,14 +22,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import org.apache.http.HttpHost;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class LoginActivity extends AppCompatActivity {
     String TAG = "iKOSMO";
@@ -36,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText m_id, m_pw;
     ProgressDialog dialog;
     TextView join, login_search;
+    String loginURL = "http://192.168.219.200:8282/project_final/android/memberLogin.do";
+    String sessionURL = "http://192.168.219.200:8282/project_final/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 //http://본인컴퓨터IP:8080/경로명
                 /*
                 execute()메소드를 통해 doInBackground()메소드를 호출한다.
@@ -105,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                 첫번째는 요청URL, 두번째와 세번째는 서버로 전송할 파라미터임.
                  */
                 new AsyncHttpServer().execute(
-                        "http://192.168.219.200:8282/project_final/android/memberLogin.do",
+                        loginURL,
                         "m_id="+m_id.getText().toString(),
                         "m_pw="+m_pw.getText().toString()
                 );
@@ -149,14 +162,40 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 URL url = new URL(strings[0]);//파라미터1 : 요청URL
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+
+
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
                 OutputStream out= conn.getOutputStream();
+
                 out.write(strings[1].getBytes());//파라미터2 : 사용자아이디
                 out.write("&".getBytes());//&를 사용하여 쿼리스트링 형태로 만들어준다.
                 out.write(strings[2].getBytes());//파라미터3 : 사용자패스워드
+
+
+                String COOKIES_HEADER = "Set-Cookie";
+                conn.connect();
+                Map<String, List<String>> headerFields = conn.getHeaderFields();
+                List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+
+                if(cookiesHeader != null) {
+                    for (String cookie : cookiesHeader) {
+                        String cookieName = HttpCookie.parse(cookie).get(0).getName();
+                        String cookieValue = HttpCookie.parse(cookie).get(1).getValue();
+
+                        String cookieString = cookieName + "=" + cookieValue + "Domain=" + loginURL;
+
+                        CookieManager.getInstance().setCookie(loginURL, cookieString);
+                        String getCookie = CookieManager.getInstance().getCookie(loginURL);
+                        SharedPreference.setAttribute(getApplicationContext(), "cookie", getCookie);
+                        SharedPreference.setAttribute(getApplicationContext(), "loginURL", loginURL);
+                    }
+                }
+
+
                 out.flush();
                 out.close();
+
 
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
 
@@ -205,14 +244,13 @@ public class LoginActivity extends AppCompatActivity {
                 String m_id = memberInfo.getString("m_id");
                 String m_name = memberInfo.getString("m_name");
 
+                SharedPreference.setAttribute(getApplicationContext(), "m_id", m_id);
+                SharedPreference.setAttribute(getApplicationContext(), "m_name", m_name);
+
                 //파싱후 로그인 성공인 경우
                 if(success==1){
-                    sb.append(m_name + "님 환영합니다!");
-
                     //메인으로 이동
                     Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    mainIntent.putExtra("m_id", m_id);
-                    mainIntent.putExtra("m_name", m_name);
                     startActivity(mainIntent);
 
                 }
