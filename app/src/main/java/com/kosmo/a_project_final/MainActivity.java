@@ -6,16 +6,22 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.CookieManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         onBackPressed();
 
+
         /* 메뉴 띄우기 */
         MenuAdapter adapter = new MenuAdapter(this, resIds, titles );
         menuView = (GridView)findViewById(R.id.gridview);
@@ -58,61 +65,77 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent1;
 
-                String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
-
                 if(titles[i] == "Club"){
                     intent1 = new Intent(getApplicationContext(), ClubActivity.class);
 
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Matching"){
-
-                    String getCookie = CookieManager.getInstance().getCookie("http://192.168.219.200:8282/project_final/android/memberLogin.do");
-                    Log.d("KOSMO61", getCookie);
-
-                    if(getCookie != null) {
-
-                        intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
-                        intent1.putExtra("title", titles[i]);
-                        intent1.putExtra("url", "http://192.168.219.200:8282/project_final/match/matchMain.do");
-                        startActivity(intent1);
-                    }
+                    intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
+                    intent1.putExtra("title", titles[i]);
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/match/matchMain.do");
+                    startActivity(intent1);
                 }
                 else if(titles[i] == "Manager"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/manager/managerMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/manager/managerMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Mypage"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/member/mypageMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/member/mypageMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Q&A"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/customer/qnaMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/customer/qnaMain.do");
                     startActivity(intent1);
                 }
                 else if(titles[i] == "Charge"){
                     intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
                     intent1.putExtra("title", titles[i]);
-                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/payment/paymentMain.do");
+                    intent1.putExtra("url", "http://192.168.219.130:8282/project_final/payment/paymentMain.do");
                     startActivity(intent1);
                 }
             }
         });
 
-
+        Intent mainIntent = getIntent();
         log_name = (TextView)findViewById(R.id.log_name);
-        String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
-        String m_name = SharedPreference.getAttribute(getApplicationContext(), "m_name");
+        m_id = mainIntent.getStringExtra("m_id");
+        m_name = mainIntent.getStringExtra("m_name");
+
         log_name.setText(m_name);
 
-        Toast.makeText(getApplicationContext(), m_name + " 님 환영합니다.", Toast.LENGTH_SHORT).show();
+        SharedPreference.setAttribute(getApplicationContext(), "m_id", m_id);
 
+        String id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+        Toast.makeText(getApplicationContext(), "접속 ID : " + id, Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
     }
 
     //뒤로가기 버튼

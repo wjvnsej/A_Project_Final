@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,10 +43,10 @@ public class ClubView extends AppCompatActivity {
         c_emb = clubIntent.getStringExtra("c_emb");
         c_name = clubIntent.getStringExtra("c_name");
 
-        String img = "http://192.168.219.200:8282/project_final/resources/uploadsFile/"+c_emb;
+        String img = "http://192.168.219.130:8282/project_final/resources/uploadsFile/"+c_emb;
         Picasso.get().load(img).into(imageView);
 
-        
+
         textView.setText(c_name);
 
     }
@@ -56,7 +57,7 @@ public class ClubView extends AppCompatActivity {
         Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer().execute(
-                "http://192.168.219.200:8282/project_final/android/clubMember.do",
+                "http://192.168.219.130:8282/project_final/android/clubMember.do",
                 "c_idx="+c_idx
         );
     }
@@ -112,6 +113,17 @@ public class ClubView extends AppCompatActivity {
             super.onPostExecute(maps);
             Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
 
+            //상단바 변경
+            TextView text1 = (TextView)findViewById(R.id.text1);
+            TextView text2 = (TextView)findViewById(R.id.text2);
+            TextView text3 = (TextView)findViewById(R.id.text3);
+            TextView text4 = (TextView)findViewById(R.id.text4);
+            text1.setText("이름");
+            text2.setText("핸드폰");
+            text3.setText("등급");
+            text4.setVisibility(View.GONE);
+
+            //리스트뷰 띄우기
             ClubMember_Adapter clubMemberAdapter = new ClubMember_Adapter(getApplicationContext(),R.layout.activity_club_member__adapter, maps);
             listView.setAdapter(clubMemberAdapter);
 
@@ -127,7 +139,7 @@ public class ClubView extends AppCompatActivity {
         Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer2().execute(
-                "http://192.168.219.200:8282/project_final/android/clubViewMatch.do",
+                "http://192.168.219.130:8282/project_final/android/clubViewMatch.do",
                 "c_idx="+c_idx
         );
     }
@@ -179,12 +191,35 @@ public class ClubView extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Map<String, Object>> maps) {
+        protected void onPostExecute(final List<Map<String, Object>> maps) {
             super.onPostExecute(maps);
             Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
+            //상단바 변경
+            TextView text1 = (TextView)findViewById(R.id.text1);
+            TextView text2 = (TextView)findViewById(R.id.text2);
+            TextView text3 = (TextView)findViewById(R.id.text3);
+            TextView text4 = (TextView)findViewById(R.id.text4);
+            text1.setText("날짜");
+            text2.setText("시간");
+            text3.setText("장소");
+            text4.setVisibility(View.VISIBLE);
+            text4.setText("상대팀");
 
+            //리스트뷰 띄우기
             ClubMatch_Adapter clubMatchAdapter = new ClubMatch_Adapter(getApplicationContext(),R.layout.activity_club_member__adapter, maps);
             listView.setAdapter(clubMatchAdapter);
+
+            //리스트뷰 안에 아이템들 눌렀을때
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getApplicationContext(), ClubMatchView.class);
+
+                    intent.putExtra("g_sname",maps.get(position).get("g_sname").toString());
+
+                    startActivity(intent);
+                }
+            });
 
         }
     }

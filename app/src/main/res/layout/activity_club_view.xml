@@ -25,7 +25,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
         android:orientation="horizontal">
 
         <Button
@@ -53,41 +52,44 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/cardview_shadow_start_color"
         >
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/text1"
             android:textSize="20dp"
-            android:text="이름"
             android:gravity="center"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/text2"
             android:textSize="20dp"
-            android:text="핸드폰"
             android:gravity="center"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="2"
-            android:text="등급"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/text3"
+            android:textSize="20dp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/text4"
             android:textSize="20dp"
             android:gravity="center"/>
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="500dp"
         android:id="@+id/club_memberlist"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:dividerHeight="10dp"
+        android:dividerHeight="1dp"
         android:divider="#4CAF50">
     </ListView>
 
