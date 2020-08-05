@@ -43,7 +43,7 @@ public class ClubView extends AppCompatActivity {
         c_emb = clubIntent.getStringExtra("c_emb");
         c_name = clubIntent.getStringExtra("c_name");
 
-        String img = "http://192.168.219.130:8282/project_final/resources/uploadsFile/"+c_emb;
+        String img = "http://192.168.219.200:8282/project_final/resources/uploadsFile/"+c_emb;
         Picasso.get().load(img).into(imageView);
 
 
@@ -57,7 +57,7 @@ public class ClubView extends AppCompatActivity {
         Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer().execute(
-                "http://192.168.219.130:8282/project_final/android/clubMember.do",
+                "http://192.168.219.200:8282/project_final/android/clubMember.do",
                 "c_idx="+c_idx
         );
     }
@@ -139,7 +139,7 @@ public class ClubView extends AppCompatActivity {
         Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer2().execute(
-                "http://192.168.219.130:8282/project_final/android/clubViewMatch.do",
+                "http://192.168.219.200:8282/project_final/android/clubViewMatch.do",
                 "c_idx="+c_idx
         );
     }

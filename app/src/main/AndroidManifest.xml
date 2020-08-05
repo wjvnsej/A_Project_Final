@@ -41,6 +41,7 @@
         </activity>
         <activity android:name=".Loading" />
         <activity android:name=".MainActivity" />
+        <uses-library android:name ="org.apache.http.legacy" android:required ="false"/>
     </application>
 
 </manifest>

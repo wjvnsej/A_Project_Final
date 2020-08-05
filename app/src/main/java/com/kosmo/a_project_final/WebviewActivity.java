@@ -1,20 +1,35 @@
 package com.kosmo.a_project_final;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
+
+import org.apache.http.cookie.Cookie;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class WebviewActivity extends AppCompatActivity {
 
     private WebView mWebView; // 웹뷰 선언
     private WebSettings mWebSettings; //웹뷰세팅
     String url;
+    String memberURL = "http://192.168.219.200:8282/project_final/android/memberLogin.do?m_id=";
+    private SharedPreferences mPreferences;
 
+    String token="";
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +37,7 @@ public class WebviewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
+        Cookie sessionCookie =null;
 
         // 웹뷰 시작
         mWebView = (WebView) findViewById(R.id.webView);
@@ -38,8 +54,33 @@ public class WebviewActivity extends AppCompatActivity {
         mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
+        mWebSettings.setAppCacheEnabled(true);
 
-        mWebView.loadUrl(url); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        CookieSyncManager.createInstance(this);
+        CookieSyncManager.getInstance().startSync();
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        CookieManager.getInstance().setAcceptThirdPartyCookies(mWebView, true);
+
+        String cookie = SharedPreference.getAttribute(getApplicationContext(), "cookie");
+        String loginURL = SharedPreference.getAttribute(getApplicationContext(), "loginURL");
+        String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+        String m_pw = SharedPreference.getAttribute(getApplicationContext(), "m_pw");
+
+        if(cookie != null){
+            String cookieString = cookie + "Domain=" + loginURL;
+
+            CookieManager.getInstance().setCookie(loginURL, cookieString);
+        }
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String token2= SharedPreference.getAttribute(getApplicationContext(), "auth_token");
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("Access-Token", token2);
+
+        mWebView.loadUrl(url);
+
 
     }
 }
