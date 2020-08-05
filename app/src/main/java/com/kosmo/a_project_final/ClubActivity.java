@@ -42,7 +42,7 @@ public class ClubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
                 new AsyncHttpServer().execute(
-                        "http://192.168.219.200:8282/project_final/android/listView.do",
+                        "http://192.168.219.130:8282/project_final/android/listView.do",
                         "m_id="+m_id
                 );
             }
@@ -117,10 +117,12 @@ public class ClubActivity extends AppCompatActivity {
             ClubList_Adapter clubListAdapter = new ClubList_Adapter(getApplicationContext(),R.layout.activity_club_list, s);
             listView.setAdapter(clubListAdapter);
 
-            //리스트뷰 안에 아이템들 눌렀을때
+            //리스트뷰 띄우기
             ClubList_Adapter adapter = new ClubList_Adapter(getApplicationContext(), R.layout.activity_club_list, s);
             listView = (ListView)findViewById(R.id.club_list);
             listView.setAdapter(adapter);
+
+            //리스트뷰 안에 아이템들 눌렀을때
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

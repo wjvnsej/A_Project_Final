@@ -62,6 +62,7 @@ public class ClubMatch_Adapter extends BaseAdapter {
         c_name.setText(list.get(position).get("c_name").toString());
 
 
+
         return convertView;
     }
 }
