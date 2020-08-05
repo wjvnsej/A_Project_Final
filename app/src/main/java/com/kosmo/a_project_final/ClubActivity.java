@@ -42,7 +42,7 @@ public class ClubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
                 new AsyncHttpServer().execute(
-                        "http://192.168.219.130:8282/project_final/android/listView.do",
+                        "http://192.168.219.200:8282/project_final/android/listView.do",
                         "m_id="+m_id
                 );
             }
