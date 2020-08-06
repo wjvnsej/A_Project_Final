@@ -216,6 +216,10 @@ public class ClubView extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ClubMatchView.class);
 
                     intent.putExtra("g_sname",maps.get(position).get("g_sname").toString());
+                    intent.putExtra("g_memo",maps.get(position).get("g_memo").toString());
+                    intent.putExtra("g_lat",maps.get(position).get("g_lat").toString());
+                    intent.putExtra("g_lng",maps.get(position).get("g_lng").toString());
+                    intent.putExtra("g_idx",maps.get(position).get("g_idx").toString());
 
                     startActivity(intent);
                 }
