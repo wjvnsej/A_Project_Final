@@ -11,7 +11,8 @@
         android:layout_height="50dp"
         android:id="@+id/g_snameTxt"
         android:gravity="center"
-        android:textSize="30dp"/>
+        android:textSize="40dp"
+        android:textColor="#000"/>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
@@ -28,7 +29,7 @@
         android:text="참 고 사 항"
         android:textColor="@color/colorPrimary"
         android:gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="30dp"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="250dp">
@@ -42,20 +43,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20sp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="참가 신청"
+            android:textSize="20dp"
+            android:onClick="btn_request"
+            android:layout_weight="1"
+            android:id="@+id/btn_request"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="참가 거절"
+            android:textSize="20dp"
+            android:onClick="btn_reject"
+            android:layout_weight="1"
+            android:id="@+id/btn_reject"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="신청"
+            android:text="참가자 리스트"
             android:textSize="20dp"
-            android:onClick="btn_request"
+            android:onClick="GameMemberList"
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="거절"
+            android:text="포메이션"
             android:textSize="20dp"
-            android:onClick="btn_refusal"
             android:layout_weight="1"/>
     </LinearLayout>
 

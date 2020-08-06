@@ -50,6 +50,15 @@ public class ClubView extends AppCompatActivity {
         textView.setText(c_name);
 
     }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
     //클럽 맴버 리스트
     public void ClubMemberList(View view){
         Intent clubIntent = getIntent();
@@ -136,11 +145,14 @@ public class ClubView extends AppCompatActivity {
         Intent clubIntent1 = getIntent();
         //int c_idx = Integer.parseInt(clubIntent1.getStringExtra("c_idx"));
         String c_idx = clubIntent1.getStringExtra("c_idx");
+        SharedPreference.setAttribute(getApplicationContext(), "c_idx", c_idx);
+        String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
         Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer2().execute(
                 "http://192.168.219.200:8282/project_final/android/clubViewMatch.do",
-                "c_idx="+c_idx
+                "c_idx="+c_idx,
+                "m_id="+m_id
         );
     }
     class AsyncHttpServer2 extends AsyncTask<String, Void, List<Map<String, Object>>>
@@ -158,6 +170,8 @@ public class ClubView extends AppCompatActivity {
                 conn.setDoOutput(true);
                 OutputStream out= conn.getOutputStream();
                 out.write(strings[1].getBytes());//파라미터2 : 클럽idx
+                out.write("&".getBytes());//&를 사용하여 쿼리스트링 형태로 만들어준다.
+                out.write(strings[2].getBytes());//파라미터2 : 사용자아이디
                 out.flush();
                 out.close();
 
@@ -220,6 +234,7 @@ public class ClubView extends AppCompatActivity {
                     intent.putExtra("g_lat",maps.get(position).get("g_lat").toString());
                     intent.putExtra("g_lng",maps.get(position).get("g_lng").toString());
                     intent.putExtra("g_idx",maps.get(position).get("g_idx").toString());
+                    intent.putExtra("gm_check",maps.get(position).get("gm_check").toString());
 
                     startActivity(intent);
                 }
