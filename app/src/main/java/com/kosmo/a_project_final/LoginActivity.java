@@ -163,7 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                 URL url = new URL(strings[0]);//파라미터1 : 요청URL
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
 
-
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
                 OutputStream out= conn.getOutputStream();
