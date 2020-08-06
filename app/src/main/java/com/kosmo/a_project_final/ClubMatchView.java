@@ -90,13 +90,17 @@ public class ClubMatchView extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+
             StringBuffer receiveData = new StringBuffer();
+
             try {
                 URL url = new URL(strings[0]);//파라미터1 : 요청URL
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
                 OutputStream out= conn.getOutputStream();
+
                 out.write(strings[1].getBytes());
                 out.write("&".getBytes());//&를 사용하여 쿼리스트링 형태로 만들어준다.
                 out.write(strings[2].getBytes());
@@ -134,8 +138,5 @@ public class ClubMatchView extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), ClubView.class);
             startActivity(intent);
         }
-    }
-    public void btn_refusal(View view){
-
     }
 }
