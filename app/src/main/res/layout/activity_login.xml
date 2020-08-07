@@ -65,7 +65,9 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:selectAllOnFocus="true"
-                android:hint="ID"/>
+                android:hint="ID">
+                <requestFocus/>
+            </EditText>
 
             <EditText
                 android:id="@+id/m_pw"

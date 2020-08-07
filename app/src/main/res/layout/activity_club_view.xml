@@ -48,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="전술"
+            android:onClick="ClubTactic"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
@@ -84,12 +85,12 @@
             android:textSize="20dp"
             android:gravity="center"/>
     </LinearLayout>
+
     <ListView
+        android:id="@+id/club_memberlist"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:id="@+id/club_memberlist"
-        android:dividerHeight="1dp"
-        android:divider="#4CAF50">
-    </ListView>
+        android:divider="#4CAF50"
+        android:dividerHeight="1dp"></ListView>
 
 </LinearLayout>
