@@ -341,6 +341,7 @@ public class ClubMatchView extends AppCompatActivity {
         Intent intent =new Intent(getApplicationContext(),ClubFormationView.class);
 
         intent.putExtra("g_formation",formation);
+        Log.d("kosmoo", formation);
 
         startActivity(intent);
     }

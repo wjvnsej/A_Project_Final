@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -22,6 +23,7 @@ public class ClubFormationView extends AppCompatActivity {
         ImageView g_formation = (ImageView)findViewById(R.id.formation);
 
         String img = "http://192.168.219.200:8282/project_final/resources/uploadsFile/"+formation;
+        Log.d("kosmoo", img);
         Picasso.get().load(img).into(g_formation);
 
     }

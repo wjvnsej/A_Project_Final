@@ -305,6 +305,7 @@ public class ClubView extends AppCompatActivity {
                     intent.putExtra("g_lng",maps.get(position).get("g_lng").toString());
                     intent.putExtra("g_idx",maps.get(position).get("g_idx").toString());
                     intent.putExtra("gm_check",maps.get(position).get("gm_check").toString());
+                    intent.putExtra("g_formation",maps.get(position).get("g_formation").toString());
 
                     startActivity(intent);
                 }
