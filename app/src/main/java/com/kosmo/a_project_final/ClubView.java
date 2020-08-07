@@ -118,7 +118,7 @@ public class ClubView extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<Map<String, Object>> maps) {
+        protected void onPostExecute(final List<Map<String, Object>> maps) {
             super.onPostExecute(maps);
             Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
 
@@ -135,6 +135,48 @@ public class ClubView extends AppCompatActivity {
             //리스트뷰 띄우기
             ClubMember_Adapter clubMemberAdapter = new ClubMember_Adapter(getApplicationContext(),R.layout.activity_club_member__adapter, maps);
             listView.setAdapter(clubMemberAdapter);
+
+            //리스트뷰 안에 아이템들 눌렀을때
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    String m_pic = maps.get(position).get("m_pic").toString();
+                    String m_name = maps.get(position).get("m_name").toString();
+                    String m_birth = maps.get(position).get("m_birth").toString();
+                    String m_phone = maps.get(position).get("m_phone").toString();
+                    String m_position = maps.get(position).get("m_position").toString();
+                    String m_sex = maps.get(position).get("m_sex").toString();
+                    String m_foot = maps.get(position).get("m_foot").toString();
+                    String m_date = maps.get(position).get("m_date").toString();
+                    String m_abil = maps.get(position).get("m_abil").toString();
+                    Log.i(TAG,"m_pic ="+m_pic);
+                    Log.i(TAG,"m_name ="+m_name);
+                    Log.i(TAG,"m_birth ="+m_birth);
+                    Log.i(TAG,"m_phone ="+m_phone);
+                    Log.i(TAG,"m_position ="+m_position);
+                    Log.i(TAG,"m_sex ="+m_sex);
+                    Log.i(TAG,"m_foot ="+m_foot);
+                    Log.i(TAG,"m_date ="+m_date);
+                    Log.i(TAG,"m_abil ="+m_abil);
+
+                    ClubMemberDialog clubMemberDialog = new ClubMemberDialog(ClubView.this);
+                    clubMemberDialog.callFunction(
+                            m_pic,
+                            m_name,
+                            m_birth,
+                            m_phone,
+                            m_position,
+                            m_sex,
+                            m_foot,
+                            m_date,
+                            m_abil
+                    );
+
+
+
+                }
+            });
 
         }
     }
@@ -235,12 +277,18 @@ public class ClubView extends AppCompatActivity {
                     intent.putExtra("g_lng",maps.get(position).get("g_lng").toString());
                     intent.putExtra("g_idx",maps.get(position).get("g_idx").toString());
                     intent.putExtra("gm_check",maps.get(position).get("gm_check").toString());
+                    intent.putExtra("g_formation",maps.get(position).get("g_formation").toString());
+
 
                     startActivity(intent);
                 }
             });
 
         }
+    }
+
+    public void ClubView(View view){
+
     }
 
 }

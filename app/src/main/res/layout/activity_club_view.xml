@@ -30,11 +30,6 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="클럽 보기"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
             android:text="클럽 회원"
             android:onClick="ClubMemberList"
             android:layout_weight="1"/>
@@ -48,6 +43,12 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="전술"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="회원 랭킹"
+            android:onClick="ClubView"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout

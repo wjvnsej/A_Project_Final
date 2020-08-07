@@ -34,7 +34,7 @@ public class ClubMatchView extends AppCompatActivity {
 
     String TAG = "iKOSMO";
     String g_idx;
-
+    String formation;
     Button apply_button;
     Button reject_button;
 
@@ -46,6 +46,7 @@ public class ClubMatchView extends AppCompatActivity {
         Intent intent = getIntent();
 
         g_idx = intent.getStringExtra("g_idx");
+        formation = intent.getStringExtra("g_formation");
 
         TextView g_snameTxt = (TextView)findViewById(R.id.g_snameTxt);
         g_snameTxt.setText(intent.getStringExtra("g_sname"));
@@ -266,5 +267,15 @@ public class ClubMatchView extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void Gameformation(View view){
+
+        Intent intent =new Intent(getApplicationContext(),ClubFormationView.class);
+
+        intent.putExtra("g_formation",formation);
+
+        startActivity(intent);
+    }
+
 
 }
