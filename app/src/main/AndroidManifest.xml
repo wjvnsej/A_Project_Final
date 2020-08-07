@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,8 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".GameMember_Adapter"></activity>
+        <activity android:name=".GameMemberList" />
 
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="ad054b2497f44138c09fded292f22a9e"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="ad054b2497f44138c09fded292f22a9e" />
 
         <activity android:name=".ClubMatchView" />
         <activity android:name=".ClubMatch_Adapter" />
@@ -41,7 +44,10 @@
         </activity>
         <activity android:name=".Loading" />
         <activity android:name=".MainActivity" />
-        <uses-library android:name ="org.apache.http.legacy" android:required ="false"/>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

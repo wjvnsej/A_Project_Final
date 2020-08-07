@@ -52,10 +52,9 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:orientation="horizontal"
-        android:background="@color/cardview_shadow_start_color"
-        >
+        android:background="@color/cardview_shadow_start_color">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

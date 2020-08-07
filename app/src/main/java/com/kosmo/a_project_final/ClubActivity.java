@@ -130,17 +130,17 @@ public class ClubActivity extends AppCompatActivity {
 
                     intent.putExtra("c_idx",s.get(position).get("c_idx").toString());
                     intent.putExtra("c_name",s.get(position).get("c_name").toString());
-                    //intent.putExtra("c_cash",s.get(position).get("c_cash").toString());
                     intent.putExtra("c_emb",s.get(position).get("c_emb").toString());
                     intent.putExtra("c_area",s.get(position).get("c_area").toString());
                     intent.putExtra("c_type",s.get(position).get("c_type").toString());
                     intent.putExtra("c_date",s.get(position).get("c_date").toString());
                     intent.putExtra("c_memo",s.get(position).get("c_memo").toString());
-                    //intent.putExtra("c_color",s.get(position).get("c_color").toString());
                     intent.putExtra("c_ability",s.get(position).get("c_ability").toString());
                     intent.putExtra("c_gender",s.get(position).get("c_gender").toString());
                     intent.putExtra("c_memlimit",s.get(position).get("c_memlimit").toString());
                     intent.putExtra("c_age",s.get(position).get("c_age").toString());
+                    //intent.putExtra("c_color",s.get(position).get("c_color").toString());
+                    //intent.putExtra("c_cash",s.get(position).get("c_cash").toString());
                     //intent.putExtra("start",s.get(position).get("start").toString());
                     //intent.putExtra("end",s.get(position).get("end").toString());
 

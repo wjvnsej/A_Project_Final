@@ -100,6 +100,12 @@ public class MainActivity extends AppCompatActivity {
                     intent1.putExtra("url", "http://192.168.219.200:8282/project_final/payment/paymentMain.do");
                     startActivity(intent1);
                 }
+                else if(titles[i] == "Tacktics"){
+                    intent1 = new Intent(getApplicationContext(), WebviewActivity.class);
+                    intent1.putExtra("title", titles[i]);
+                    intent1.putExtra("url", "http://192.168.219.200:8282/project_final/club/clubTacticBoard.do?g_idx=97");
+                    startActivity(intent1);
+                }
             }
         });
 
