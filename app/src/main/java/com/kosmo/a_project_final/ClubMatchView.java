@@ -1,8 +1,17 @@
 package com.kosmo.a_project_final;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
 import java.io.BufferedReader;
@@ -37,6 +47,10 @@ public class ClubMatchView extends AppCompatActivity {
     String formation;
     Button apply_button;
     Button reject_button;
+    Button kakao;
+    MapView kakaoMapView;
+    double g_lat, g_lng;
+    double myLat, myLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +82,8 @@ public class ClubMatchView extends AppCompatActivity {
         String g_lat1 = intent.getStringExtra("g_lat");
         String g_lng1 = intent.getStringExtra("g_lng");
 
-        double g_lat = Double.parseDouble(g_lat1);
-        double g_lng = Double.parseDouble(g_lng1);
+        g_lat = Double.parseDouble(g_lat1);
+        g_lng = Double.parseDouble(g_lng1);
 
         Log.i(TAG,"g_lat : "+g_lat);
         Log.i(TAG,"g_lng : "+g_lng);
@@ -89,6 +103,59 @@ public class ClubMatchView extends AppCompatActivity {
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
         mapView.addPOIItem(marker);
+
+
+        //권한체크 후 사용자에 의해 취소되었다면 다시 요청함.
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 1);
+        }
+
+    }
+
+    public void kakao(View view){
+
+        //위치관리자에 대한 참조값을 구한다.
+        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        //위치가 업데이트 되면 호출되는 리스너를 정의한다.
+        LocationListener locationListener = new LocationListener() {
+
+            //새로운 위치가 발견되면 위치제공자에 의해 호출되는 콜백메소드
+            @Override
+            public void onLocationChanged(Location location) {
+                myLat = location.getLatitude();
+                myLng = location.getLongitude();
+            }
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
+        };
+
+        //위치를 업데이트 받기위해 리스너를 위치관리자에 등록한다.
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            //네트워크를 통해서 위치를 알 수 있다.
+            locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
+
+            //GPS 를 통해서 위치를 알 수 있다.
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+        }
+
+        String url = "kakaomap://route?sp=" + myLat + "," + myLng + "&ep=" + g_lat  + "," + g_lng + "&by=CAR";
+        final Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent3);
 
     }
 
@@ -112,6 +179,7 @@ public class ClubMatchView extends AppCompatActivity {
                 "m_id="+m_id
         );
     }
+
     class AsyncHttpServer extends AsyncTask<String, Void , String> {
 
         @Override
