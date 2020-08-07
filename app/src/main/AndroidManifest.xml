@@ -17,6 +17,8 @@
         <activity android:name=".Tactic_WebView"></activity>
         <activity android:name=".ClubTactic_Adapter" />
         <activity android:name=".GameMember_Adapter" />
+        <activity android:name=".ClubMemberDialog"></activity>
+        <activity android:name=".ClubFormationView" />
         <activity android:name=".GameMemberList" />
 
         <meta-data
