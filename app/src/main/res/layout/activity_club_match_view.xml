@@ -46,7 +46,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="신청"
+            android:text="참가"
             android:textSize="20dp"
             android:onClick="btn_request"
             android:layout_weight="1"/>

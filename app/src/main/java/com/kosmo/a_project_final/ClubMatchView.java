@@ -81,8 +81,8 @@ public class ClubMatchView extends AppCompatActivity {
 
         new AsyncHttpServer().execute(
                 "http://192.168.219.200:8282/project_final/android/gameMemberApply.do",
-                "g_idx"+g_idx,
-                "m_id"+m_id
+                "g_idx="+g_idx,
+                "m_id="+m_id
         );
     }
     class AsyncHttpServer extends AsyncTask<String, Void , String>
@@ -136,7 +136,16 @@ public class ClubMatchView extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Intent intent = new Intent(getApplicationContext(), ClubView.class);
+
             startActivity(intent);
         }
+    }
+    public void btn_refusal(View view){
+        Intent intent = getIntent();
+        String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+        String g_idx = intent.getStringExtra("g_idx");
+        Log.i(TAG, "g_idx : "+ g_idx);
+        Log.i(TAG, "m_id : "+ m_id);
+
     }
 }
