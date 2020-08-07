@@ -50,12 +50,45 @@
             android:layout_height="70dp"
             android:text="회원 랭킹"
             android:onClick="ClubView"
+            android:id="@+id/club_rankBtn"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rankinglay"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="득점 순위"
+            android:onClick="btn_goal"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="어시스트 순위"
+            android:onClick="btn_Assist"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="공격포인트 순위"
+            android:onClick="btn_attack"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="최다 출전"
+            android:onClick="btn_participation"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal"
+        android:id="@+id/topbar"
         android:background="@color/cardview_shadow_start_color">
         <TextView
             android:layout_width="match_parent"
@@ -85,6 +118,13 @@
             android:id="@+id/text4"
             android:textSize="20dp"
             android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/text5"
+            android:textSize="20dp"
+            android:gravity="center"/>
     </LinearLayout>
 
     <ListView
@@ -92,6 +132,13 @@
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:divider="#4CAF50"
-        android:dividerHeight="1dp"></ListView>
+        android:dividerHeight="1dp"/>
+
+    <ListView
+        android:id="@+id/club_Ranklist"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:divider="#4CAF50"
+        android:dividerHeight="1dp"/>
 
 </LinearLayout>

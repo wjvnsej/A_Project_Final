@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,6 +50,9 @@ public class ClubView extends AppCompatActivity {
 
 
         textView.setText(c_name);
+
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+        linearLayout.setVisibility(View.GONE);
 
     }
 
@@ -128,10 +132,22 @@ public class ClubView extends AppCompatActivity {
             TextView text2 = (TextView)findViewById(R.id.text2);
             TextView text3 = (TextView)findViewById(R.id.text3);
             TextView text4 = (TextView)findViewById(R.id.text4);
+            TextView text5 = (TextView)findViewById(R.id.text5);
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+            linearLayout.setVisibility(View.GONE);
+            LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+            linearLayout2.setVisibility(View.VISIBLE);
+            ListView listView1 =(ListView)findViewById(R.id.club_memberlist);
+            listView1.setVisibility(View.VISIBLE);
+            ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
+            listView2.setVisibility(View.GONE);
+
+
             text1.setText("이름");
             text2.setText("핸드폰");
             text3.setText("등급");
             text4.setVisibility(View.GONE);
+            text5.setVisibility(View.GONE);
 
             //리스트뷰 띄우기
             ClubMember_Adapter clubMemberAdapter = new ClubMember_Adapter(getApplicationContext(),R.layout.activity_club_member__adapter, maps);
@@ -256,11 +272,22 @@ public class ClubView extends AppCompatActivity {
             TextView text2 = (TextView)findViewById(R.id.text2);
             TextView text3 = (TextView)findViewById(R.id.text3);
             TextView text4 = (TextView)findViewById(R.id.text4);
+            TextView text5 = (TextView)findViewById(R.id.text5);
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+            linearLayout.setVisibility(View.GONE);
+            LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+            linearLayout2.setVisibility(View.VISIBLE);
+            ListView listView1 =(ListView)findViewById(R.id.club_memberlist);
+            listView1.setVisibility(View.VISIBLE);
+            ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
+            listView2.setVisibility(View.GONE);
+
             text1.setText("날짜");
             text2.setText("시간");
             text3.setText("장소");
             text4.setVisibility(View.VISIBLE);
             text4.setText("상대팀");
+            text5.setVisibility(View.GONE);
 
             //리스트뷰 띄우기
             ClubMatch_Adapter clubMatchAdapter = new ClubMatch_Adapter(getApplicationContext(),R.layout.activity_club_member__adapter, maps);
@@ -295,7 +322,8 @@ public class ClubView extends AppCompatActivity {
         SharedPreference.setAttribute(getApplicationContext(), "c_idx", c_idx);
         String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
         Log.i(TAG,"c_idx:"+c_idx);
-
+        LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+        linearLayout2.setVisibility(View.VISIBLE);
         new AsyncHttpServer3().execute(
                 "http://192.168.219.200:8282/project_final/android/clubViewMatch.do",
                 "c_idx="+c_idx,
@@ -360,11 +388,23 @@ public class ClubView extends AppCompatActivity {
             TextView text2 = (TextView)findViewById(R.id.text2);
             TextView text3 = (TextView)findViewById(R.id.text3);
             TextView text4 = (TextView)findViewById(R.id.text4);
+            TextView text5 = (TextView)findViewById(R.id.text5);
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+            linearLayout.setVisibility(View.GONE);
+            LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+            linearLayout2.setVisibility(View.VISIBLE);
+            ListView listView1 =(ListView)findViewById(R.id.club_memberlist);
+            listView1.setVisibility(View.VISIBLE);
+            ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
+            listView2.setVisibility(View.GONE);
+
+
             text1.setText("날짜");
             text2.setText("시간");
             text3.setText("장소");
             text4.setVisibility(View.VISIBLE);
             text4.setText("전술판");
+            text5.setVisibility(View.GONE);
 
             //리스트뷰 띄우기
             ClubTactic_Adapter clubTacticAdapter = new ClubTactic_Adapter(getApplicationContext(),R.layout.activity_club_tactic__adapter, maps, c_name);
@@ -386,7 +426,6 @@ public class ClubView extends AppCompatActivity {
                     intent.putExtra("gm_check",maps.get(position).get("gm_check").toString());
                     intent.putExtra("g_formation",maps.get(position).get("g_formation").toString());
 
-
                     startActivity(intent);
                 }
             });
@@ -395,6 +434,113 @@ public class ClubView extends AppCompatActivity {
     }
 
     public void ClubView(View view){
+        LinearLayout linearLayout1 = (LinearLayout)findViewById(R.id.rankinglay);
+        linearLayout1.setVisibility(View.VISIBLE);
+        ListView listView =(ListView)findViewById(R.id.club_memberlist);
+        listView.setVisibility(View.GONE);
+        LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+        linearLayout2.setVisibility(View.GONE);
+    }
+
+    public void btn_goal(View view){
+        Intent clubIntent11 = getIntent();
+        String c_idx = clubIntent11.getStringExtra("c_idx");
+        Log.i(TAG,"c_idx:"+c_idx);
+        LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+        linearLayout2.setVisibility(View.GONE);
+
+        new AsyncHttpServer4().execute(
+                "http://192.168.219.200:8282/project_final/android/clubMemberGoal.do",
+                "c_idx="+c_idx
+        );
+    }
+    class AsyncHttpServer4 extends AsyncTask<String, Void, List<Map<String, Object>>>
+    {
+        List<Map<String, Object>> goalRanking = null;
+        ListView listView = (ListView)findViewById(R.id.club_Ranklist);
+
+        @Override
+        protected List<Map<String, Object>> doInBackground(String... strings) {
+            try {
+                StringBuffer receiveData = new StringBuffer();
+                URL url = new URL(strings[0]);//파라미터1 : 요청URL
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoOutput(true);
+                OutputStream out= conn.getOutputStream();
+                out.write(strings[1].getBytes());//파라미터2 : 클럽idx
+                out.flush();
+                out.close();
+
+                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+
+                    // 스프링 서버에 연결성공한 경우 JSON데이터를 읽어서 저장한다.
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(conn.getInputStream(),"UTF-8")
+                    );
+                    String data;
+                    while((data=reader.readLine())!=null){
+                        receiveData.append(data+"\r\n");
+                    }
+                    reader.close();
+                }
+                else{
+                    Log.i(TAG, "HTTP_OK 안됨. 연결실패.");
+                }
+
+                Log.i(TAG,"서버에서 넘어온 값 : "+ receiveData.toString());
+
+                Type listType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+                Gson g = new Gson();
+                goalRanking = g.fromJson(receiveData.toString(),listType);
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            return goalRanking;
+        }
+
+        @Override
+        protected void onPostExecute(final List<Map<String, Object>> maps) {
+            super.onPostExecute(maps);
+            Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
+            //상단바 변경
+            TextView text1 = (TextView)findViewById(R.id.text1);
+            TextView text2 = (TextView)findViewById(R.id.text2);
+            TextView text3 = (TextView)findViewById(R.id.text3);
+            TextView text4 = (TextView)findViewById(R.id.text4);
+            TextView text5 = (TextView)findViewById(R.id.text5);
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+            linearLayout.setVisibility(View.VISIBLE);
+            LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+            linearLayout2.setVisibility(View.VISIBLE);
+            ListView listView1 =(ListView)findViewById(R.id.club_memberlist);
+            listView1.setVisibility(View.GONE);
+            ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
+            listView2.setVisibility(View.VISIBLE);
+
+            text1.setText("순위");
+            text2.setText("사진");
+            text3.setText("선수명");
+            text4.setVisibility(View.VISIBLE);
+            text4.setText("경기 수");
+            text5.setVisibility(View.VISIBLE);
+            text5.setText("득점");
+
+            //리스트뷰 띄우기
+            ClubMemberGoalRank clubMemberGoalRank = new ClubMemberGoalRank(getApplicationContext(), maps,R.layout.activity_club_member_goal_rank);
+            listView.setAdapter(clubMemberGoalRank);
+        }
+    }
+
+    public void btn_Assist(View view){
+
+    }
+    public void btn_attack(View view){
+
+    }
+    public void btn_participation(View view){
 
     }
 
