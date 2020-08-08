@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "792935294323",
+    "firebase_url": "https://b-pro-edea7.firebaseio.com",
+    "project_id": "b-pro-edea7",
+    "storage_bucket": "b-pro-edea7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792935294323:android:154458990a76a897901106",
+        "android_client_info": {
+          "package_name": "com.kosmo.a_project_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792935294323-68s1cusgtafiqqvduc4srjec0l49hupf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuYlOFyj5lhBIbsWvFUihOtcYwiOCrIio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792935294323-68s1cusgtafiqqvduc4srjec0l49hupf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
