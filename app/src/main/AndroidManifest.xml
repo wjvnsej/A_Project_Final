@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ClubMemberGoalRank_Adapter"></activity>
+        <activity android:name=".ClubMemberAppearance_Adapter"></activity>
+        <activity android:name=".ClubMemberPoint_Adapter" />
+        <activity android:name=".ClubMemberAssist_Adapter" />
+        <activity android:name=".ClubMemberGoalRank_Adapter" />
         <activity android:name=".Tactic_WebView" />
         <activity android:name=".ClubTactic_Adapter" />
         <activity android:name=".GameMember_Adapter" />
@@ -53,7 +56,6 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
     </application>
 
 </manifest>

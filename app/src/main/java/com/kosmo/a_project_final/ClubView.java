@@ -534,14 +534,287 @@ public class ClubView extends AppCompatActivity {
         }
     }
 
+    //팀원 어시 랭킹
     public void btn_Assist(View view){
+        Intent clubIntent11 = getIntent();
+        String c_idx = clubIntent11.getStringExtra("c_idx");
+        Log.i(TAG,"c_idx:"+c_idx);
+        LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+        linearLayout2.setVisibility(View.GONE);
 
+        new AsyncHttpServer5().execute(
+                "http://192.168.219.200:8282/project_final/android/clubMemberAssist.do",
+                "c_idx="+c_idx
+        );
     }
+
+    class AsyncHttpServer5 extends AsyncTask<String, Void, List<Map<String, Object>>>
+    {
+        List<Map<String, Object>> assist = null;
+        ListView listView = (ListView)findViewById(R.id.club_Ranklist);
+
+        @Override
+        protected List<Map<String, Object>> doInBackground(String... strings) {
+            try {
+                StringBuffer receiveData = new StringBuffer();
+                URL url = new URL(strings[0]);//파라미터1 : 요청URL
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoOutput(true);
+                OutputStream out= conn.getOutputStream();
+                out.write(strings[1].getBytes());//파라미터2 : 클럽idx
+                out.flush();
+                out.close();
+
+                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+
+                    // 스프링 서버에 연결성공한 경우 JSON데이터를 읽어서 저장한다.
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(conn.getInputStream(),"UTF-8")
+                    );
+                    String data;
+                    while((data=reader.readLine())!=null){
+                        receiveData.append(data+"\r\n");
+                    }
+                    reader.close();
+                }
+                else{
+                    Log.i(TAG, "HTTP_OK 안됨. 연결실패.");
+                }
+
+                Log.i(TAG,"서버에서 넘어온 값 : "+ receiveData.toString());
+
+                Type listType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+                Gson g = new Gson();
+                assist = g.fromJson(receiveData.toString(),listType);
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            return assist;
+        }
+
+        @Override
+        protected void onPostExecute(final List<Map<String, Object>> maps) {
+            super.onPostExecute(maps);
+            Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
+            //상단바 변경
+            TextView text1 = (TextView)findViewById(R.id.text1);
+            TextView text2 = (TextView)findViewById(R.id.text2);
+            TextView text3 = (TextView)findViewById(R.id.text3);
+            TextView text4 = (TextView)findViewById(R.id.text4);
+            TextView text5 = (TextView)findViewById(R.id.text5);
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+            linearLayout.setVisibility(View.VISIBLE);
+            LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+            linearLayout2.setVisibility(View.VISIBLE);
+            ListView listView1 =(ListView)findViewById(R.id.club_memberlist);
+            listView1.setVisibility(View.GONE);
+            ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
+            listView2.setVisibility(View.VISIBLE);
+
+            text1.setText("순위");
+            text2.setText("사진");
+            text3.setText("선수명");
+            text4.setVisibility(View.VISIBLE);
+            text4.setText("경기 수");
+            text5.setVisibility(View.VISIBLE);
+            text5.setText("어시스트");
+
+            //리스트뷰 띄우기
+            ClubMemberAssist_Adapter clubMemberAssistAdapter =
+                    new ClubMemberAssist_Adapter(getApplicationContext(), maps, R.layout.activity_club_member_assist__adapter);
+            listView.setAdapter(clubMemberAssistAdapter);
+        }
+    }
+    //팀원 공포 랭킹
     public void btn_attack(View view){
+        Intent clubIntent11 = getIntent();
+        String c_idx = clubIntent11.getStringExtra("c_idx");
+        Log.i(TAG,"c_idx:"+c_idx);
+        LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+        linearLayout2.setVisibility(View.GONE);
 
+        new AsyncHttpServer6().execute(
+                "http://192.168.219.200:8282/project_final/android/clubMemberPoint.do",
+                "c_idx="+c_idx
+        );
     }
-    public void btn_participation(View view){
 
+    class AsyncHttpServer6 extends AsyncTask<String, Void, List<Map<String, Object>>>
+    {
+        List<Map<String, Object>> pointRank = null;
+        ListView listView = (ListView)findViewById(R.id.club_Ranklist);
+
+        @Override
+        protected List<Map<String, Object>> doInBackground(String... strings) {
+            try {
+                StringBuffer receiveData = new StringBuffer();
+                URL url = new URL(strings[0]);//파라미터1 : 요청URL
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoOutput(true);
+                OutputStream out= conn.getOutputStream();
+                out.write(strings[1].getBytes());//파라미터2 : 클럽idx
+                out.flush();
+                out.close();
+
+                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+
+                    // 스프링 서버에 연결성공한 경우 JSON데이터를 읽어서 저장한다.
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(conn.getInputStream(),"UTF-8")
+                    );
+                    String data;
+                    while((data=reader.readLine())!=null){
+                        receiveData.append(data+"\r\n");
+                    }
+                    reader.close();
+                }
+                else{
+                    Log.i(TAG, "HTTP_OK 안됨. 연결실패.");
+                }
+
+                Log.i(TAG,"서버에서 넘어온 값 : "+ receiveData.toString());
+
+                Type listType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+                Gson g = new Gson();
+                pointRank = g.fromJson(receiveData.toString(),listType);
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            return pointRank;
+        }
+
+        @Override
+        protected void onPostExecute(final List<Map<String, Object>> maps) {
+            super.onPostExecute(maps);
+            Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
+            //상단바 변경
+            TextView text1 = (TextView)findViewById(R.id.text1);
+            TextView text2 = (TextView)findViewById(R.id.text2);
+            TextView text3 = (TextView)findViewById(R.id.text3);
+            TextView text4 = (TextView)findViewById(R.id.text4);
+            TextView text5 = (TextView)findViewById(R.id.text5);
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+            linearLayout.setVisibility(View.VISIBLE);
+            LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+            linearLayout2.setVisibility(View.VISIBLE);
+            ListView listView1 =(ListView)findViewById(R.id.club_memberlist);
+            listView1.setVisibility(View.GONE);
+            ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
+            listView2.setVisibility(View.VISIBLE);
+
+            text1.setText("순위");
+            text2.setText("사진");
+            text3.setText("선수명");
+            text4.setVisibility(View.VISIBLE);
+            text4.setText("경기 수");
+            text5.setVisibility(View.VISIBLE);
+            text5.setText("공격포인트");
+
+            //리스트뷰 띄우기
+            ClubMemberPoint_Adapter clubMemberPointAdapter =
+                    new ClubMemberPoint_Adapter(getApplicationContext(), maps,R.layout.activity_club_member_point__adapter);
+            listView.setAdapter(clubMemberPointAdapter);
+        }
+    }
+
+    //팀원 경기 랭킹
+    public void btn_participation(View view){
+        Intent clubIntent11 = getIntent();
+        String c_idx = clubIntent11.getStringExtra("c_idx");
+        Log.i(TAG,"c_idx:"+c_idx);
+        LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+        linearLayout2.setVisibility(View.GONE);
+
+        new AsyncHttpServer7().execute(
+                "http://192.168.219.200:8282/project_final/android/clubMemberAppearance.do",
+                "c_idx="+c_idx
+        );
+    }
+
+    class AsyncHttpServer7 extends AsyncTask<String, Void, List<Map<String, Object>>>
+    {
+        List<Map<String, Object>> appearanceRank = null;
+        ListView listView = (ListView)findViewById(R.id.club_Ranklist);
+
+        @Override
+        protected List<Map<String, Object>> doInBackground(String... strings) {
+            try {
+                StringBuffer receiveData = new StringBuffer();
+                URL url = new URL(strings[0]);//파라미터1 : 요청URL
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoOutput(true);
+                OutputStream out= conn.getOutputStream();
+                out.write(strings[1].getBytes());//파라미터2 : 클럽idx
+                out.flush();
+                out.close();
+
+                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+
+                    // 스프링 서버에 연결성공한 경우 JSON데이터를 읽어서 저장한다.
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(conn.getInputStream(),"UTF-8")
+                    );
+                    String data;
+                    while((data=reader.readLine())!=null){
+                        receiveData.append(data+"\r\n");
+                    }
+                    reader.close();
+                }
+                else{
+                    Log.i(TAG, "HTTP_OK 안됨. 연결실패.");
+                }
+
+                Log.i(TAG,"서버에서 넘어온 값 : "+ receiveData.toString());
+
+                Type listType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+                Gson g = new Gson();
+                appearanceRank = g.fromJson(receiveData.toString(),listType);
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            return appearanceRank;
+        }
+
+        @Override
+        protected void onPostExecute(final List<Map<String, Object>> maps) {
+            super.onPostExecute(maps);
+            Log.i(TAG,"Adapter 로 넘어가는 값 : "+ String.valueOf(maps));
+            //상단바 변경
+            TextView text1 = (TextView)findViewById(R.id.text1);
+            TextView text2 = (TextView)findViewById(R.id.text2);
+            TextView text3 = (TextView)findViewById(R.id.text3);
+            TextView text4 = (TextView)findViewById(R.id.text4);
+            TextView text5 = (TextView)findViewById(R.id.text5);
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.rankinglay);
+            linearLayout.setVisibility(View.VISIBLE);
+            LinearLayout linearLayout2 = (LinearLayout)findViewById(R.id.topbar);
+            linearLayout2.setVisibility(View.VISIBLE);
+            ListView listView1 =(ListView)findViewById(R.id.club_memberlist);
+            listView1.setVisibility(View.GONE);
+            ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
+            listView2.setVisibility(View.VISIBLE);
+
+            text1.setText("순위");
+            text2.setText("사진");
+            text3.setText("선수명");
+            text4.setVisibility(View.VISIBLE);
+            text4.setText("경기 수");
+            text5.setVisibility(View.GONE);
+
+            //리스트뷰 띄우기
+            ClubMemberAppearance_Adapter clubMemberAppearance =
+                    new ClubMemberAppearance_Adapter(getApplicationContext(), maps, R.layout.activity_club_member_appearance__adapter);
+            listView.setAdapter(clubMemberAppearance);
+        }
     }
 
 }

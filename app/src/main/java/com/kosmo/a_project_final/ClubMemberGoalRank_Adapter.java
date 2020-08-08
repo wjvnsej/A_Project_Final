@@ -67,7 +67,6 @@ public class ClubMemberGoalRank_Adapter extends BaseAdapter {
         appearance.setText(list.get(position).get("appearance").toString());
         goal.setText(list.get(position).get("goal").toString());
 
-        Log.i(TAG,"position"+position);
         return convertView;
     }
 }
