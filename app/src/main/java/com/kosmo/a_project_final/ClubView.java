@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -530,7 +529,7 @@ public class ClubView extends AppCompatActivity {
             text5.setText("득점");
 
             //리스트뷰 띄우기
-            ClubMemberGoalRank clubMemberGoalRank = new ClubMemberGoalRank(getApplicationContext(), maps,R.layout.activity_club_member_goal_rank);
+            ClubMemberGoalRank_Adapter clubMemberGoalRank = new ClubMemberGoalRank_Adapter(getApplicationContext(), maps,R.layout.activity_club_member_goal_rank);
             listView.setAdapter(clubMemberGoalRank);
         }
     }
