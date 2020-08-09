@@ -208,7 +208,7 @@ public class ClubView extends AppCompatActivity {
         Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer2().execute(
-                "http://192.168.219.109:8282/project_final/android/clubViewMatch.do",
+                "http://192.168.219.200:8282/project_final/android/clubViewMatch.do",
                 "c_idx="+c_idx,
                 "m_id="+m_id
         );

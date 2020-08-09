@@ -100,7 +100,7 @@ public class ClubSearch extends AppCompatActivity {
                 Log.i(TAG,"c_gender : "+genderSpinner.getSelectedItem().toString());
                 Log.i(TAG,"c_age : "+ageSpinner.getSelectedItem().toString());
                 new AsyncHttpServer().execute(
-                        "http://192.168.219.109:8282/project_final/android/clubSearch.do",
+                        "http://192.168.219.200:8282/project_final/android/clubSearch.do",
                         "c_name="+search_name.getText().toString(),
                         "c_area="+guSpinner.getSelectedItem().toString(),
                         "c_ability="+abliSpinner.getSelectedItem().toString(),
