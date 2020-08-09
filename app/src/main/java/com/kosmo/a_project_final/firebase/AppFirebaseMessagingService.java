@@ -18,7 +18,9 @@ import com.kosmo.a_project_final.LoginActivity;
 import com.kosmo.a_project_final.R;
 import com.kosmo.a_project_final.SharedPreference;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.util.Map;
 
 public class AppFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
@@ -29,11 +31,15 @@ public class AppFirebaseMessagingService extends com.google.firebase.messaging.F
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Map<String, String> pushDataMap = remoteMessage.getData();
 
-        sendNotification(pushDataMap);
+        try {
+            sendNotification(pushDataMap);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         set_alarm_badge();
     }
 
-    private void sendNotification(Map<String, String> data){
+    private void sendNotification(Map<String, String> data) throws UnsupportedEncodingException {
 
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -68,8 +74,12 @@ public class AppFirebaseMessagingService extends com.google.firebase.messaging.F
         }
 
         notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        notificationBuilder.setContentTitle(data.get("title"));
-        notificationBuilder.setContentText(data.get("msg"));
+
+        String title = URLDecoder.decode(data.get("title"), "UTF-8");
+        String msg = URLDecoder.decode(data.get("msg"), "UTF-8");
+
+        notificationBuilder.setContentTitle(title);
+        notificationBuilder.setContentText(msg);
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setSound(defaultSoundUri);
         notificationBuilder.setContentIntent(contentIntent);

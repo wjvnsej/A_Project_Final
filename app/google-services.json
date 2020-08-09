@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "792935294323-cjrmrqg2j4rlbcrck4dbuk1m80etmfec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kosmo.a_project_final",
+            "certificate_hash": "b7bd513cfb6e4c7e67156067d5209bdeff078166"
+          }
+        },
+        {
           "client_id": "792935294323-68s1cusgtafiqqvduc4srjec0l49hupf.apps.googleusercontent.com",
           "client_type": 3
         }

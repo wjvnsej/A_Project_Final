@@ -15,6 +15,11 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import static com.kosmo.a_project_final.R.drawable.sub_logo1;
+
 public class FireBaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
@@ -47,8 +52,18 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getNotification().getBody());
+            String title = "", content = "";
+            try {
+                title = URLDecoder.decode(remoteMessage.getNotification().getTitle(), "UTF-8");
+                content = URLDecoder.decode(remoteMessage.getNotification().getBody(), "UTF-8");
+                Log.d(TAG, "Message Notification Body : " + remoteMessage.getNotification().getBody());
+                Log.d(TAG, "Message Notification Title : " + remoteMessage.getNotification().getTitle());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+
+            sendNotification(title, content);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -66,23 +81,22 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
     /**
      * Create and show a simple notification containing the received FCM message.
      *
-     * @param messageBody FCM message body received.
      */
-    private void sendNotification(String messageBody) {
+    private void sendNotification(String title, String content) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = "bpro";
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.bpro);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("FCM Message")
-                        .setContentText(messageBody)
+                        .setSmallIcon(sub_logo1)
+                        .setContentTitle(title)
+                        .setContentText(content)
                         .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
+                        .setSound(sound)
                         .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =
