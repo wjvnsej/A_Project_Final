@@ -1,16 +1,12 @@
 package com.kosmo.a_project_final;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,18 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.kosmo.a_project_final.firebase.AppFirebaseInstanceIDService;
 import com.kosmo.a_project_final.firebase.AppFirebaseMessagingService;
 
-import org.apache.http.HttpHost;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -42,8 +32,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class LoginActivity extends AppCompatActivity {
     String TAG = "iKOSMO";
