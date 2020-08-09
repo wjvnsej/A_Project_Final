@@ -26,7 +26,7 @@ import java.util.Map;
 public class ClubActivity extends AppCompatActivity {
 
     String TAG = "iKOSMO";
-    ImageView club_my;
+    ImageView club_my , club_seach, club_rank;
     ListView listView;
 
 
@@ -36,6 +36,8 @@ public class ClubActivity extends AppCompatActivity {
         setContentView(R.layout.activity_club);
 
         club_my = (ImageView)findViewById(R.id.club_my);
+        club_seach = (ImageView)findViewById(R.id.club_seachImg);
+        club_rank = (ImageView)findViewById(R.id.club_rank);
 
         club_my.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +49,23 @@ public class ClubActivity extends AppCompatActivity {
                 );
             }
         });
+
+        club_seach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ClubSearch.class);
+                startActivity(intent);
+            }
+        });
+
+        club_rank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ClubRanking.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -150,5 +169,7 @@ public class ClubActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 }

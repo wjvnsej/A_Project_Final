@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText m_id, m_pw;
     ProgressDialog dialog;
     TextView join, login_search;
-    String loginURL = "http://192.168.219.200:8282/project_final/android/memberLogin.do";
-    String sessionURL = "http://192.168.219.200:8282/project_final/";
+    String loginURL = "http://192.168.219.109:8282/project_final/android/memberLogin.do";
+    String sessionURL = "http://192.168.219.109:8282/project_final/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
