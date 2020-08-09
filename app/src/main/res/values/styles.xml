@@ -10,6 +10,10 @@
         <!-- 타이틀 바 지우기 -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <!-- 폰트적용 -->
+        <item name="fontFamily">@font/raleway_semi_bold</item>
+        <item name="font">@font/raleway_semi_bold</item>
     </style>
 
 </resources>

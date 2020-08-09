@@ -3,6 +3,7 @@ package com.kosmo.a_project_final;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -21,6 +22,11 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.kosmo.a_project_final.firebase.AppFirebaseInstanceIDService;
+import com.kosmo.a_project_final.firebase.AppFirebaseMessagingService;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
@@ -47,12 +53,23 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog dialog;
     TextView join, login_search;
     String loginURL = "http://192.168.219.200:8282/project_final/android/memberLogin.do";
-    String sessionURL = "http://192.168.219.200:8282/project_final/";
+
+    private Intent serviceIntent;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        token = FirebaseInstanceId.getInstance().getToken();
+        SharedPreference.setAttribute(getApplicationContext(), "token", token);
+
+        serviceIntent = new Intent(this, AppFirebaseMessagingService.class);
+        startService(serviceIntent);
+        serviceIntent = new Intent(this, AppFirebaseInstanceIDService.class);
+        startService(serviceIntent);
+
         /* 상태 바 지우기(전체화면) */
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -106,6 +123,9 @@ public class LoginActivity extends AppCompatActivity {
         m_id = (EditText)findViewById(R.id.m_id);
         m_pw = (EditText)findViewById(R.id.m_pw);
 
+        token = SharedPreference.getAttribute(getApplicationContext(), "token");
+        Log.d(TAG, "서버 전송 직전 token : " + token);
+
         Button btnLogin = (Button)findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -120,7 +140,8 @@ public class LoginActivity extends AppCompatActivity {
                 new AsyncHttpServer().execute(
                         loginURL,
                         "m_id="+m_id.getText().toString(),
-                        "m_pw="+m_pw.getText().toString()
+                        "m_pw="+m_pw.getText().toString(),
+                        "m_token="+token
                 );
             }
         });
@@ -170,6 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                 out.write(strings[1].getBytes());//파라미터2 : 사용자아이디
                 out.write("&".getBytes());//&를 사용하여 쿼리스트링 형태로 만들어준다.
                 out.write(strings[2].getBytes());//파라미터3 : 사용자패스워드
+                out.write("&".getBytes());//&를 사용하여 쿼리스트링 형태로 만들어준다.
+                out.write(strings[3].getBytes());//파라미터4 : 사용자토큰
 
 
                 String COOKIES_HEADER = "Set-Cookie";

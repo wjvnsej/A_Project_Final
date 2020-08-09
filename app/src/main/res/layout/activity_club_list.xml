@@ -16,6 +16,7 @@
         android:layout_height="100dp"
         android:id="@+id/club_name"
         android:gravity="center"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:fontFamily="@font/raleway_semi_bold"/>
 
 </LinearLayout>

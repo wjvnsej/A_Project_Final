@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ClubMemberAppearance_Adapter"></activity>
+
+        <activity android:name=".ClubMenuActivity" />
+        <activity android:name=".ClubMemberAppearance_Adapter" />
         <activity android:name=".ClubMemberPoint_Adapter" />
         <activity android:name=".ClubMemberAssist_Adapter" />
         <activity android:name=".ClubMemberGoalRank_Adapter" />
@@ -34,10 +36,6 @@
         <activity android:name=".ClubMember_Adapter" />
         <activity android:name=".ClubView" />
         <activity android:name=".ClubList_Adapter" />
-        <activity android:name=".ChargeActivity" />
-        <activity android:name=".MypageActivity" />
-        <activity android:name=".ManagerActivity" />
-        <activity android:name=".MatchActivity" />
         <activity android:name=".ClubActivity" />
         <activity android:name=".WebviewActivity" />
         <activity
@@ -52,6 +50,20 @@
         </activity>
         <activity android:name=".Loading" />
         <activity android:name=".MainActivity" />
+
+        <service
+            android:name=".FireBaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
 
         <uses-library
             android:name="org.apache.http.legacy"
