@@ -59,6 +59,7 @@ public class ClubTactic_Adapter extends BaseAdapter {
         final TextView g_time = (TextView)convertView.findViewById(R.id.game_time);
         final TextView g_sname = (TextView)convertView.findViewById(R.id.stadium_name);
         final Button g_tactic = (Button)convertView.findViewById(R.id.game_tactic);
+        final Button g_QR = (Button)convertView.findViewById(R.id.game_QR);
 
         Log.i(TAG,"BaseAdapter 에 들어온 값 : "+list);
 
@@ -76,6 +77,18 @@ public class ClubTactic_Adapter extends BaseAdapter {
                 intent.putExtra("g_idx", g_idx);
                 intent.putExtra("myC_name", c_name);
                 intent.putExtra("yourC_name", yourC_name);
+                context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
+
+
+        g_QR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),Game_QR_Create.class);
+
+                intent.putExtra("g_idx", g_idx);
+
                 context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
             }
         });

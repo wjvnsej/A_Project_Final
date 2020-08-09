@@ -24,7 +24,6 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.kosmo.a_project_final.firebase.AppFirebaseInstanceIDService;
 import com.kosmo.a_project_final.firebase.AppFirebaseMessagingService;
 

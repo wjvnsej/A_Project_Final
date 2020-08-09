@@ -208,7 +208,7 @@ public class ClubView extends AppCompatActivity {
         Log.i(TAG,"c_idx:"+c_idx);
 
         new AsyncHttpServer2().execute(
-                "http://192.168.219.200:8282/project_final/android/clubViewMatch.do",
+                "http://192.168.219.109:8282/project_final/android/clubViewMatch.do",
                 "c_idx="+c_idx,
                 "m_id="+m_id
         );
@@ -398,37 +398,17 @@ public class ClubView extends AppCompatActivity {
             ListView listView2 =(ListView)findViewById(R.id.club_Ranklist);
             listView2.setVisibility(View.GONE);
 
-
             text1.setText("날짜");
             text2.setText("시간");
             text3.setText("장소");
             text4.setVisibility(View.VISIBLE);
             text4.setText("전술판");
-            text5.setVisibility(View.GONE);
+            text5.setVisibility(View.VISIBLE);
+            text5.setText("기록");
 
             //리스트뷰 띄우기
             ClubTactic_Adapter clubTacticAdapter = new ClubTactic_Adapter(getApplicationContext(),R.layout.activity_club_tactic__adapter, maps, c_name);
             listView.setAdapter(clubTacticAdapter);
-
-
-
-            //리스트뷰 안에 아이템들 눌렀을때
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getApplicationContext(), ClubMatchView.class);
-
-                    intent.putExtra("g_sname",maps.get(position).get("g_sname").toString());
-                    intent.putExtra("g_memo",maps.get(position).get("g_memo").toString());
-                    intent.putExtra("g_lat",maps.get(position).get("g_lat").toString());
-                    intent.putExtra("g_lng",maps.get(position).get("g_lng").toString());
-                    intent.putExtra("g_idx",maps.get(position).get("g_idx").toString());
-                    intent.putExtra("gm_check",maps.get(position).get("gm_check").toString());
-                    intent.putExtra("g_formation",maps.get(position).get("g_formation").toString());
-
-                    startActivity(intent);
-                }
-            });
 
         }
     }

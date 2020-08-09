@@ -4,51 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ClubTactic_Adapter">
+    android:orientation="horizontal"
+    tools:context=".ClubSearch_Adapter">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="7"
         android:orientation="horizontal">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_weight="5"
+            android:id="@+id/c_picImg"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:textSize="20dp"
-            android:id="@+id/game_date"
+            android:id="@+id/c_nameTxt"
             android:gravity="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_weight="2"
+            android:layout_weight="5"
             android:textSize="20dp"
-            android:id="@+id/game_time"
+            android:id="@+id/c_areaTxt"
             android:gravity="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_weight="2"
+            android:layout_weight="5"
             android:textSize="20dp"
-            android:id="@+id/stadium_name"
+            android:id="@+id/c_abilityTxt"
             android:gravity="center"/>
-        <Button
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_weight="2"
+            android:layout_weight="5"
             android:textSize="20dp"
-            android:id="@+id/game_tactic"
-            android:text="전술"
+            android:id="@+id/c_ageTxt"
             android:gravity="center"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_weight="2"
-            android:textSize="20dp"
-            android:id="@+id/game_QR"
-            android:text="QR"
-            android:gravity="center"/>
+
+
     </LinearLayout>
 
 </LinearLayout>
