@@ -36,6 +36,7 @@ public class Game_QR_Create extends AppCompatActivity {
     private ImageView iv;
     private String text;
     String g_idx1, g_qrcheck;
+    String g_num;
     Button btn_history;
     String TAG = "iKOSMO";
     @Override
@@ -45,6 +46,10 @@ public class Game_QR_Create extends AppCompatActivity {
 
         Intent intent = getIntent();
         g_idx1 = intent.getStringExtra("g_idx");
+        g_num = intent.getStringExtra("g_num");
+
+        Log.i(TAG, "g_num : "+g_num);
+
 
         btn_history = (Button)findViewById(R.id.btn_history);
 
@@ -63,8 +68,10 @@ public class Game_QR_Create extends AppCompatActivity {
 
         final String[] g_idx=g_idx1.split("\\.");
 
+
         iv = (ImageView)findViewById(R.id.qrcode);
-        text = "http://192.168.219.109:8282/project_final/android/qr_Check.do?g_idx="+g_idx[0];
+        //상대방이 큐알코드 찍으면 넘어가는 페이지
+        text = "http://192.168.219.109:8282/project_final/android/your_QR_Check.do?g_idx="+g_idx[0]+"&g_num="+g_num;
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try{
@@ -125,12 +132,30 @@ public class Game_QR_Create extends AppCompatActivity {
         protected void onPostExecute(List<Map<String, Object>> maps) {
             super.onPostExecute(maps);
             g_qrcheck = maps.get(0).get("g_qrcheck").toString();
+            g_num = maps.get(0).get("g_num").toString();
+
             Log.i(TAG, "g_qrcheck : "+g_qrcheck);
             if (g_qrcheck.equals("no")){
                 Toast.makeText(getApplicationContext(), "상대방이 QR코드를 스캔하지않아 넘어갈수 없습니다", Toast.LENGTH_LONG).show();
             }else if(g_qrcheck.equals("yes")){
                 Toast.makeText(getApplicationContext(), "상대방이 QR코드를 스캔하였습니다.", Toast.LENGTH_LONG).show();
 
+                Intent intent1 = getIntent();
+
+                g_idx1 = intent1.getStringExtra("g_idx");
+                Log.i(TAG, "g_idx1 : "+g_idx1);
+
+                g_num = intent1.getStringExtra("g_num");
+
+                Log.i(TAG, "g_num : "+g_num);
+
+                final String[] g_idx=g_idx1.split("\\.");
+
+                Intent intent = new Intent(getApplicationContext(), QR_WebView_Activity.class);
+                //내가 들어갈 페이지
+                intent.putExtra("url","http://192.168.219.109:8282/project_final/android/my_QR_Check.do?g_idx="+g_idx[0]+"&g_num="+g_num);
+
+                startActivity(intent);
             }
         }
     }

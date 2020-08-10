@@ -4,13 +4,13 @@
     package="com.kosmo.a_project_final">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 카메라 퍼미션 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 카메라 퍼미션 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
-    <!-- 5.0 버전 파일업로드 퍼미션 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
-    <!-- 외부 저장소 사용 -->
+
+    <uses-feature android:name="android.hardware.camera" /> <!-- 5.0 버전 파일업로드 퍼미션 -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" /> <!-- 외부 저장소 사용 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Game_QR_Create"></activity>
+        <activity android:name=".QR_WebView_Activity"></activity>
+        <activity android:name=".Game_QR_Create" />
         <activity android:name=".ClubCreate" />
         <activity android:name=".ClubTotalRank_Adapter" />
         <activity android:name=".ClubRanking" />
@@ -62,17 +63,14 @@
         <activity android:name=".Loading" />
         <activity android:name=".MainActivity" />
 
-        <service
-            android:name=".FireBaseMessagingService">
+        <service android:name=".FireBaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service
-            android:name=".FirebaseInstanceIDService">
+        <service android:name=".FirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
