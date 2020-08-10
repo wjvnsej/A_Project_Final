@@ -49,13 +49,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        token = FirebaseInstanceId.getInstance().getToken();
-        SharedPreference.setAttribute(getApplicationContext(), "token", token);
+        token = SharedPreference.getAttribute(getApplicationContext(), "token");
 
-        serviceIntent = new Intent(this, AppFirebaseMessagingService.class);
-        startService(serviceIntent);
-        serviceIntent = new Intent(this, AppFirebaseInstanceIDService.class);
-        startService(serviceIntent);
+//        Log.d("token", token);
+
+        if(SharedPreference.getAttribute(getApplicationContext(), "m_id") != null){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
 
         /* 상태 바 지우기(전체화면) */
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -110,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
         m_id = (EditText)findViewById(R.id.m_id);
         m_pw = (EditText)findViewById(R.id.m_pw);
 
-        token = SharedPreference.getAttribute(getApplicationContext(), "token");
         Log.d(TAG, "서버 전송 직전 token : " + token);
 
         Button btnLogin = (Button)findViewById(R.id.btn_login);
