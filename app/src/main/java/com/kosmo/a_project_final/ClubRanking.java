@@ -57,7 +57,7 @@ public class ClubRanking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new AsyncHttpServer().execute(
-                        "http://192.168.219.109:8282/project_final/android/clubTotalRanking.do"
+                        "http://192.168.219.200:8282/project_final/android/clubTotalRanking.do"
                 );
             }
         });
@@ -69,7 +69,7 @@ public class ClubRanking extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i(TAG,"areaSpinner.getSelectedItem().toString() : "+ areaSpinner.getSelectedItem().toString());
                 new AsyncHttpServer2().execute(
-                        "http://192.168.219.109:8282/project_final/android/clubAreaRanking.do",
+                        "http://192.168.219.200:8282/project_final/android/clubAreaRanking.do",
                         "c_area="+areaSpinner.getSelectedItem().toString()
                 );
             }
