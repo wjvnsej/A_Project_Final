@@ -130,14 +130,14 @@
     <ListView
         android:id="@+id/club_memberlist"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:divider="#4CAF50"
         android:dividerHeight="1dp"/>
 
     <ListView
         android:id="@+id/club_Ranklist"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:divider="#4CAF50"
         android:dividerHeight="1dp"/>
 
