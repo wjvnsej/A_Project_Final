@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -22,6 +23,14 @@ import static com.kosmo.a_project_final.R.drawable.sub_logo1;
 public class FireBaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
+
+    @Override
+    public void onNewToken(@NonNull String token) {
+        super.onNewToken(token);
+        Log.d(TAG, token);
+        SharedPreference.setAttribute(getApplicationContext(), "token", token);
+    }
+
 
     /**
      * Called when message is received.
@@ -82,7 +91,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
      *
      */
     private void sendNotification(String title, String content) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
