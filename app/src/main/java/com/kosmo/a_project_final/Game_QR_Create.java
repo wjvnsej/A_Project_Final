@@ -58,7 +58,7 @@ public class Game_QR_Create extends AppCompatActivity {
                 public void onClick(View v) {
 
                     new AsyncHttpServer().execute(
-                            "http://192.168.219.109:8282/project_final/android/select_qrcheck.do",
+                            "http://192.168.219.200:8282/project_final/android/select_qrcheck.do",
                             "g_idx="+g_idx1
                     );
 
@@ -71,7 +71,7 @@ public class Game_QR_Create extends AppCompatActivity {
 
         iv = (ImageView)findViewById(R.id.qrcode);
         //상대방이 큐알코드 찍으면 넘어가는 페이지
-        text = "http://192.168.219.109:8282/project_final/android/your_QR_Check.do?g_idx="+g_idx[0]+"&g_num="+g_num;
+        text = "http://192.168.219.200:8282/project_final/android/your_QR_Check.do?g_idx="+g_idx[0]+"&g_num="+g_num;
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try{
@@ -153,7 +153,7 @@ public class Game_QR_Create extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), QR_WebView_Activity.class);
                 //내가 들어갈 페이지
-                intent.putExtra("url","http://192.168.219.109:8282/project_final/android/my_QR_Check.do?g_idx="+g_idx[0]+"&g_num="+g_num);
+                intent.putExtra("url","http://192.168.219.200:8282/project_final/android/my_QR_Check.do?g_idx="+g_idx[0]+"&g_num="+g_num);
 
                 startActivity(intent);
             }
