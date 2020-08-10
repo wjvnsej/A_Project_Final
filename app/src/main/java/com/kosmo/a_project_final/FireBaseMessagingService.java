@@ -27,7 +27,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
-        Log.d(TAG, token);
+        Log.d("ikosmo", token);
         SharedPreference.setAttribute(getApplicationContext(), "token", token);
     }
 

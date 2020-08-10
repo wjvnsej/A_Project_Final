@@ -51,7 +51,12 @@ public class LoginActivity extends AppCompatActivity {
 
         token = SharedPreference.getAttribute(getApplicationContext(), "token");
 
-        Log.d("token", token);
+//        Log.d("token", token);
+
+        if(SharedPreference.getAttribute(getApplicationContext(), "m_id") != null){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
 
         /* 상태 바 지우기(전체화면) */
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

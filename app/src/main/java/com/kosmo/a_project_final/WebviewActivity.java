@@ -56,29 +56,6 @@ public class WebviewActivity extends AppCompatActivity {
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
         mWebSettings.setAppCacheEnabled(true);
 
-        CookieSyncManager.createInstance(this);
-        CookieSyncManager.getInstance().startSync();
-        CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.setAcceptCookie(true);
-        CookieManager.getInstance().setAcceptThirdPartyCookies(mWebView, true);
-
-        String cookie = SharedPreference.getAttribute(getApplicationContext(), "cookie");
-        String loginURL = SharedPreference.getAttribute(getApplicationContext(), "loginURL");
-        String m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
-        String m_pw = SharedPreference.getAttribute(getApplicationContext(), "m_pw");
-
-        if(cookie != null){
-            String cookieString = cookie + "Domain=" + loginURL;
-
-            CookieManager.getInstance().setCookie(loginURL, cookieString);
-        }
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String token2= SharedPreference.getAttribute(getApplicationContext(), "auth_token");
-
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("Access-Token", token2);
-
         mWebView.loadUrl(url);
 
 

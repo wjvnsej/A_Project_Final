@@ -166,7 +166,11 @@ public class MainActivity extends AppCompatActivity {
                                         Intent intent = new Intent(
                                                 getApplicationContext(), // 현재 화면의 제어권자
                                                 LoginActivity.class); // 다음 넘어갈 클래스 지정
+                                        String token = SharedPreference.getAttribute(getApplicationContext(), "token");
                                         SharedPreference.removeAllAttribute(getApplicationContext());
+                                        SharedPreference.setAttribute(getApplicationContext(), "token", token);
+                                        String save_token = SharedPreference.getAttribute(getApplicationContext(), "token");
+                                        Log.d("ikosmo", save_token);
                                         startActivity(intent);
                                     }
                                 })

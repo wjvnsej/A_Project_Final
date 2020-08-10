@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -170,6 +171,12 @@ public class ClubActivity extends AppCompatActivity {
         }
     }
 
+    public void clubCreate(View view){
+        Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
+
+        intent.putExtra("url", "http://192.168.219.200:8282/project_final/android/clubCreate.do");
+        startActivity(intent);
+    }
 
 
 }
