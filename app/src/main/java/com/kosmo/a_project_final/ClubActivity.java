@@ -175,6 +175,7 @@ public class ClubActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
 
         intent.putExtra("url", "http://192.168.219.200:8282/project_final/android/clubCreate.do");
+        intent.putExtra("mode", "clubCreate");
         startActivity(intent);
     }
 
