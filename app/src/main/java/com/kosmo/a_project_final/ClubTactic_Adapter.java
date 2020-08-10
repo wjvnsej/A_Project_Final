@@ -81,6 +81,7 @@ public class ClubTactic_Adapter extends BaseAdapter {
             }
         });
 
+        final String g_qrcheck = list.get(position).get("g_qrcheck").toString();
 
         g_QR.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +89,7 @@ public class ClubTactic_Adapter extends BaseAdapter {
                 Intent intent = new Intent(v.getContext(),Game_QR_Create.class);
 
                 intent.putExtra("g_idx", g_idx);
-
+                intent.putExtra("g_qrcheck", g_qrcheck);
                 context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
             }
         });
