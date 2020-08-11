@@ -32,18 +32,21 @@
             android:layout_height="70dp"
             android:text="클럽 회원"
             android:onClick="ClubMemberList"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="클럽 경기"
             android:onClick="ClubMatch"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="전술"
             android:onClick="ClubTactic"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
@@ -51,6 +54,7 @@
             android:text="회원 랭킹"
             android:onClick="ClubView"
             android:id="@+id/club_rankBtn"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
@@ -64,24 +68,28 @@
             android:layout_height="70dp"
             android:text="득점 순위"
             android:onClick="btn_goal"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="어시스트 순위"
             android:onClick="btn_Assist"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="공격포인트 순위"
             android:onClick="btn_attack"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="최다 출전"
             android:onClick="btn_participation"
+            android:background="@drawable/button_style"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout

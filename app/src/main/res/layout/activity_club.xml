@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    android:paddingTop="30dp"
     android:layout_gravity="center"
     android:gravity="center">
-    <TextView
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="클럽 메인"
-        android:textColor="#000"
-        android:gravity="center"
-        android:id="@+id/title"
-        android:layout_marginBottom="30dp"/>
+        android:layout_height="100dp"
+        android:src="@drawable/main_logo"
+        android:paddingBottom="30dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +57,7 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                android:src="@drawable/search"
+                android:src="@drawable/create"
                 android:onClick="clubCreate"/>
             <TextView
                 android:id="@+id/club_createTxt"
@@ -90,7 +89,7 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                android:src="@drawable/search"/>
+                android:src="@drawable/myclub"/>
             <TextView
                 android:id="@+id/club_myTxt"
                 android:layout_width="100dp"
@@ -108,7 +107,7 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                android:src="@drawable/search"/>
+                android:src="@drawable/rank"/>
             <TextView
                 android:id="@+id/club_rankTxt"
                 android:layout_width="100dp"

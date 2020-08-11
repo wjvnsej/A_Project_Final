@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="30dp"
         android:gravity="center"
+        android:textColor="#000"
         android:text="클럽 검색"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="클럽 이름"
             android:textSize="20dp"
+            android:textColor="#000"
             android:gravity="center"
             android:layout_weight="1"/>
         <EditText
@@ -43,6 +45,7 @@
             android:layout_height="match_parent"
             android:text="지역구"
             android:textSize="20dp"
+            android:textColor="#000"
             android:gravity="center"
             android:layout_weight="1"/>
         <Spinner
@@ -57,6 +60,7 @@
             android:layout_height="match_parent"
             android:text="실력"
             android:textSize="20dp"
+            android:textColor="#000"
             android:gravity="center"
             android:layout_weight="1"/>
         <Spinner
@@ -76,6 +80,7 @@
             android:layout_height="match_parent"
             android:text="성별"
             android:textSize="20dp"
+            android:textColor="#000"
             android:gravity="center"
             android:layout_weight="1"/>
         <Spinner
@@ -90,6 +95,7 @@
             android:layout_height="match_parent"
             android:text="나이대"
             android:textSize="20dp"
+            android:textColor="#000"
             android:gravity="center"
             android:layout_weight="1"/>
         <Spinner
@@ -105,6 +111,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_search"
         android:text="검색"
+        android:paddingTop="10dp"
+        android:background="@drawable/button_style"
         android:textSize="20dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -115,6 +123,7 @@
             android:layout_height="50dp"
             android:layout_weight="5"
             android:textSize="15dp"
+            android:textColor="#000"
             android:text="마크"
             android:gravity="center"/>
         <TextView
@@ -122,6 +131,7 @@
             android:layout_height="50dp"
             android:layout_weight="4"
             android:textSize="15dp"
+            android:textColor="#000"
             android:text="이름"
             android:gravity="center"/>
         <TextView
@@ -129,6 +139,7 @@
             android:layout_height="50dp"
             android:layout_weight="5"
             android:textSize="15dp"
+            android:textColor="#000"
             android:text="지역"
             android:gravity="center"/>
         <TextView
@@ -136,6 +147,7 @@
             android:layout_height="50dp"
             android:layout_weight="5"
             android:textSize="15dp"
+            android:textColor="#000"
             android:text="실력"
             android:gravity="center"/>
         <TextView
@@ -143,6 +155,7 @@
             android:layout_height="50dp"
             android:layout_weight="5"
             android:textSize="15dp"
+            android:textColor="#000"
             android:text="나이대"
             android:gravity="center"/>
 

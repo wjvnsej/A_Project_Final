@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 //        Log.d("token", token);
 
         if(SharedPreference.getAttribute(getApplicationContext(), "m_id") != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ClubActivity.class);
             startActivity(intent);
         }
 
@@ -261,7 +261,7 @@ public class LoginActivity extends AppCompatActivity {
                 //파싱후 로그인 성공인 경우
                 if(success==1){
                     //메인으로 이동
-                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent mainIntent = new Intent(getApplicationContext(), ClubActivity.class);
                     startActivity(mainIntent);
 
                 }

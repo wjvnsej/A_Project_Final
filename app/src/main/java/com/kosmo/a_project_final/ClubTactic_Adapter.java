@@ -73,7 +73,7 @@ public class ClubTactic_Adapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Tactic_WebView.class);
-                intent.putExtra("url", "http://192.168.219.200:8282/project_final/club/clubTacticBoard.do");
+                intent.putExtra("url", "http://192.168.219.200:8282/project_final/android/clubTacticBoard.do");
                 intent.putExtra("g_idx", g_idx);
                 intent.putExtra("myC_name", c_name);
                 intent.putExtra("yourC_name", yourC_name);

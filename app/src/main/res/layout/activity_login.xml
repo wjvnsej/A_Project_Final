@@ -87,6 +87,7 @@
                 android:layout_width="110dp"
                 android:layout_height="100dp"
                 android:enabled="true"
+                android:background="@drawable/button_style"
                 android:text="로그인"/>
         </LinearLayout>
 

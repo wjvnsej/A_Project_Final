@@ -41,6 +41,11 @@ public class QR_WebView_Activity extends AppCompatActivity {
 
         mWebView.loadUrl(url);
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), ClubActivity.class));
     }
 }

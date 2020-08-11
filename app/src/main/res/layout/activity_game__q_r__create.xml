@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:text="결과창 넘어가기"
         android:id="@+id/btn_history"
+        android:background="@drawable/button_style"
         android:textSize="30dp"/>
 
 
