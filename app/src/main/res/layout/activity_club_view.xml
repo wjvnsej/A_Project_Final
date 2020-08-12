@@ -20,6 +20,7 @@
             android:layout_height="100dp"
             android:gravity="center"
             android:textSize="30dp"
+            android:textColor="#000"
             android:id="@+id/c_name"/>
     </LinearLayout>
     <LinearLayout

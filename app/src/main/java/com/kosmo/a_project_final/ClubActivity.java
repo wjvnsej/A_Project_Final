@@ -2,15 +2,20 @@ package com.kosmo.a_project_final;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,12 +34,31 @@ public class ClubActivity extends AppCompatActivity {
     String TAG = "iKOSMO";
     ImageView club_my , club_seach, club_rank;
     ListView listView;
-
+    private TextView logout, log_name;
+    String m_id, m_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club);
+
+        /* 상태 바 지우기(전체화면) */
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        /* 로딩화면 부르기 */
+        final Intent intent = new Intent(this, Loading.class);
+        startActivity(intent);
+
+        log_name = (TextView)findViewById(R.id.log_name);
+        m_id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+        m_name = SharedPreference.getAttribute(getApplicationContext(), "m_name");
+
+        log_name.setText(m_name);
+
+        onBackPressed();
+
+        String id = SharedPreference.getAttribute(getApplicationContext(), "m_id");
+        Toast.makeText(getApplicationContext(), m_name + " 님 환영합니다!", Toast.LENGTH_SHORT).show();
 
         club_my = (ImageView)findViewById(R.id.club_my);
         club_seach = (ImageView)findViewById(R.id.club_seachImg);
@@ -177,6 +201,53 @@ public class ClubActivity extends AppCompatActivity {
         intent.putExtra("url", "http://192.168.219.200:8282/project_final/android/clubCreate.do");
         intent.putExtra("mode", "clubCreate");
         startActivity(intent);
+    }
+
+    //뒤로가기 버튼
+    @Override
+    public void onBackPressed() {
+
+        /* 로그아웃 */
+        logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.app.AlertDialog.Builder alertBasic = new AlertDialog.Builder(v.getContext());
+                alertBasic.setCancelable(false);
+                alertBasic.setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("로그아웃")
+                        .setMessage("로그아웃 하시겠습니까?")
+                        .setPositiveButton("확인",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(getApplicationContext(),
+                                                "로그아웃 되었습니다.",
+                                                Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(
+                                                getApplicationContext(), // 현재 화면의 제어권자
+                                                LoginActivity.class); // 다음 넘어갈 클래스 지정
+                                        String token = SharedPreference.getAttribute(getApplicationContext(), "token");
+                                        SharedPreference.removeAllAttribute(getApplicationContext());
+                                        SharedPreference.setAttribute(getApplicationContext(), "token", token);
+                                        String save_token = SharedPreference.getAttribute(getApplicationContext(), "token");
+                                        Log.d("ikosmo", save_token);
+                                        startActivity(intent);
+                                    }
+                                })
+                        .setNegativeButton("취소",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        /*Toast.makeText(MainActivity.this,
+                                                "취소클릭합니다.",
+                                                Toast.LENGTH_SHORT).show();*/
+                                        dialog.cancel();
+                                    }
+                                })
+                        .show();
+            }
+        });
     }
 
 

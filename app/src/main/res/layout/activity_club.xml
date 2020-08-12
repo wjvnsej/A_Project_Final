@@ -4,134 +4,169 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingRight="30dp"
-    android:paddingLeft="30dp"
-    android:paddingTop="30dp"
     android:layout_gravity="center"
     android:gravity="center">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@drawable/main_logo"
-        android:paddingBottom="30dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/log_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/logout"
+            android:text="로그아웃"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp"
         android:layout_gravity="center"
         android:gravity="center">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/main_logo"
+            android:paddingBottom="30dp"/>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginRight="50dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/club_seachImg"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:src="@drawable/search" />
-            <TextView
-                android:id="@+id/club_seachTxt"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="클럽 찾기"
-                android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginRight="50dp"
+                android:gravity="center">
 
-            <ImageView
-                android:id="@+id/club_create"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:src="@drawable/create"
-                android:onClick="clubCreate"/>
-            <TextView
-                android:id="@+id/club_createTxt"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="클럽 생성"
-                android:layout_gravity="center"
-                android:onClick="clubCreate"/>
+                <ImageView
+                    android:id="@+id/club_seachImg"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:src="@drawable/search" />
+                <TextView
+                    android:id="@+id/club_seachTxt"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="클럽 찾기"
+                    android:layout_gravity="center"/>
 
+                <ImageView
+                    android:id="@+id/club_create"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:src="@drawable/create"
+                    android:onClick="clubCreate"/>
+                <TextView
+                    android:id="@+id/club_createTxt"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="클럽 생성"
+                    android:layout_gravity="center"
+                    android:onClick="clubCreate"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginLeft="50dp">
+
+
+                <ImageView
+                    android:id="@+id/club_my"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:src="@drawable/myclub"/>
+                <TextView
+                    android:id="@+id/club_myTxt"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="내 클럽"
+                    android:layout_gravity="center"/>
+                <ImageView
+                    android:id="@+id/club_rank"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:src="@drawable/rank"/>
+                <TextView
+                    android:id="@+id/club_rankTxt"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="클럽 랭킹"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:gravity="center"
-            android:layout_marginLeft="50dp">
-
-
-            <ImageView
-                android:id="@+id/club_my"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:src="@drawable/myclub"/>
-            <TextView
-                android:id="@+id/club_myTxt"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="내 클럽"
-                android:layout_gravity="center"/>
-            <ImageView
-                android:id="@+id/club_rank"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:src="@drawable/rank"/>
-            <TextView
-                android:id="@+id/club_rankTxt"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="클럽 랭킹"
-                android:layout_gravity="center"/>
-
-        </LinearLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/club_list"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:padding="30dp"
+            android:dividerHeight="10dp"
+            android:divider="#4CAF50">
+        </ListView>
     </LinearLayout>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/club_list"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:padding="30dp"
-        android:dividerHeight="10dp"
-        android:divider="#4CAF50">
-    </ListView>
 
 </LinearLayout>

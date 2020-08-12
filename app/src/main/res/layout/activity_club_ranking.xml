@@ -10,7 +10,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="40dp"
+        android:padding="15sp"
         android:gravity="center"
         android:textColor="#000"
         android:text="클럽 랭킹"/>

@@ -6,27 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ClubMatchView">
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/g_snameTxt"
-            android:gravity="right"
-            android:textSize="40dp"
-            android:textColor="#000"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="카카오맵"
-            android:onClick="kakao"
-            android:background="@drawable/button_style"
-            android:id="@+id/kakao"/>
-    </LinearLayout>
+        android:layout_height="50dp"
+        android:id="@+id/g_snameTxt"
+        android:gravity="center"
+        android:textSize="40dp"
+        android:textColor="#000"/>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
@@ -37,17 +24,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RelativeLayout>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="참 고 사 항"
-        android:textColor="@color/colorPrimary"
-        android:gravity="center"
-        android:textSize="30dp"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="경 기 참 고 사 항"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginTop="15sp"
+            android:textSize="30dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="3"
+            android:text="경기장
+            길찾기"
+            android:textSize="20dp"
+            android:onClick="kakao"
+            android:background="@drawable/button_style"
+            android:id="@+id/kakao"/>
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp">
-
+        android:layout_height="200dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,7 +64,7 @@
         android:layout_marginBottom="20sp">
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="참가 신청"
             android:textSize="20dp"
             android:onClick="btn_request"
@@ -70,7 +73,7 @@
             android:id="@+id/btn_request"/>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="참가 거절"
             android:textSize="20dp"
             android:onClick="btn_reject"
@@ -85,7 +88,7 @@
         android:orientation="horizontal">
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="참가자 리스트"
             android:textSize="20dp"
             android:background="@drawable/button_style"
@@ -93,7 +96,7 @@
             android:layout_weight="1"/>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="포메이션"
             android:onClick="Gameformation"
             android:textSize="20dp"
