@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -18,9 +17,6 @@ public class QR_WebView_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /* 상태 바 지우기(전체화면) */
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_q_r__web_view_);
 
         final Intent intent = getIntent();
@@ -45,11 +41,7 @@ public class QR_WebView_Activity extends AppCompatActivity {
 
         mWebView.loadUrl(url);
 
+
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), ClubActivity.class));
-    }
 }
